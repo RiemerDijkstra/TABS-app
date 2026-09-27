@@ -415,7 +415,7 @@ a.bm[aria-disabled="true"] { opacity: .5; cursor: not-allowed; }
 <div class="pop settings" id="setPop" role="dialog" aria-label="Weergave-instellingen" hidden>
   <div class="grp">
     <span class="lbl">Transponeren</span>
-    <label class="radio"><input type="radio" name="mode" value="smart"><span>Slim<small>Noten die buiten de hals vallen, gaan naar een andere snaar</small></span></label>
+    <label class="radio"><input type="radio" name="mode" value="smart"><span>Slim<small>Kiest per noot de handigste snaar, zodat je hand laag op de hals en in één positie blijft</small></span></label>
     <label class="radio"><input type="radio" name="mode" value="simple"><span>Alleen fretnummers<small>Elke noot blijft op zijn snaar, zo nodig een octaaf verschoven</small></span></label>
   </div>
   <div class="grp">
@@ -669,46 +669,181 @@ const TabEngine = (() => {
     }
 
     const maxFret = opts.maxFret || 22;
-    const smart = opts.mode !== 'simple';
     let moved = 0, octave = 0;
 
-    for (const seg of segs) {
-      const occupied = new Set(seg.notes.map((nt) => nt.line));
-      const canReceive = (li) =>
-        !occupied.has(li) && /^-+$/.test(L[li].slice(seg.start, seg.end));
-      const order = seg.notes.slice().sort((a, b) => (semis < 0 ? b.line - a.line : a.line - b.line));
-      for (const nt of order) {
-        nt.newLine = nt.line;
-        nt.newVal = nt.value + semis;
-        nt.kind = null;
-        if (nt.newVal >= 0 && nt.newVal <= maxFret) continue;
-        let done = false;
-        if (smart) {
-          let li = nt.line, v = nt.newVal;
-          if (v < 0) {
-            while (li < n - 1 && v < 0) { v += iv[li]; li++; }
-          } else {
-            while (li > 0 && v > maxFret) { li--; v -= iv[li]; }
-          }
-          if (li !== nt.line && v >= 0 && v <= maxFret && canReceive(li)) {
-            occupied.delete(nt.line);
-            occupied.add(li);
-            nt.newLine = li;
-            nt.newVal = v;
-            nt.kind = 'moved';
-            moved++;
-            done = true;
-          }
+    // Standaardaanpak: elke noot op zijn eigen snaar, zo nodig een octaaf verschoven
+    const simplePlace = (nt) => {
+      let v = nt.value + semis;
+      nt.newLine = nt.line;
+      nt.kind = null;
+      if (v < 0 || v > maxFret) {
+        while (v < 0) v += 12;
+        while (v > maxFret) v -= 12;
+        nt.kind = 'octave';
+      }
+      nt.newVal = v;
+    };
+
+    const smart = opts.mode !== 'simple' && semis !== 0 && n > 1;
+    let endPos = opts.startPos == null ? null : opts.startPos;
+
+    if (!smart) {
+      for (const seg of segs) for (const nt of seg.notes) simplePlace(nt);
+    } else {
+      /* Slimme vingerzetting.
+         De hand beslaat vier frets (positie P tot P+3). Voor elk moment kiezen we een snaar per noot,
+         zodat de hand zo laag mogelijk blijft, weinig verschuift en de vorm dicht bij het origineel blijft. */
+      const W = { dist: 0.2, shift: 0.3, stretch: 1.2, octave: 3, shape: 1.5 };
+      const posCost = (P) => (P > 5 ? (P - 5) * 0.25 : 0) + (P > 9 ? (P - 9) * 0.4 : 0);
+      const PMAX = maxFret;
+      const open = new Array(n);
+      open[n - 1] = 0;
+      for (let i = n - 2; i >= 0; i--) open[i] = open[i + 1] + iv[i];
+      const LINKCH = /[hpbrs\/\\]/i;
+      const isDash = (str) => /^-+$/.test(str);
+
+      for (const r of runs) { r.origLine = r.line; r.pitch = open[r.line] + r.value + semis; }
+
+      // 1. Ketens (hammer-on, pull-off, slide, bend) verhuizen als één geheel naar de beste snaar
+      const byLine = Array.from({ length: n }, () => []);
+      runs.forEach((r) => byLine[r.line].push(r));
+      const chains = [];
+      byLine.forEach((arr, li) => {
+        arr.sort((a, b) => a.start - b.start);
+        let cur = null;
+        for (const r of arr) {
+          if (cur && /^[hpbrs\/\\]{1,2}$/i.test(L[li].slice(cur[cur.length - 1].end, r.start))) cur.push(r);
+          else { if (cur) chains.push(cur); cur = [r]; }
         }
-        if (!done) {
-          let v = nt.newVal;
-          while (v < 0) v += 12;
-          while (v > maxFret) v -= 12;
-          nt.newVal = v;
-          nt.kind = 'octave';
-          octave++;
+        if (cur) chains.push(cur);
+      });
+      for (const ch of chains) {
+        const li = ch[0].line;
+        const lead = LINKCH.test(L[li][ch[0].start - 1] || '') ? 1 : 0;
+        const trail = LINKCH.test(L[li][ch[ch.length - 1].end] || '') ? 1 : 0;
+        if (ch.length < 2 && !lead && !trail) continue;
+        const rs = ch[0].start - lead, re = ch[ch.length - 1].end + trail;
+        let best = null;
+        // Past de keten nergens? Dan schuift hij als geheel een octaaf op
+        const tooLow = Math.min(...ch.map((r) => r.pitch)) < 0;
+        for (const oct of tooLow ? [0, 12, 24] : [0, -12, -24]) {
+          for (let t = 0; t < n; t++) {
+            const fs = ch.map((r) => r.pitch + oct - open[t]);
+            if (fs.some((f) => f < 0 || f > maxFret)) continue;
+            if (t !== li && !isDash(L[t].slice(rs, re))) continue;
+            let c = W.dist * Math.abs(t - ch[0].origLine) * ch.length;
+            const fr = fs.filter((f) => f > 0);
+            if (fr.length) {
+              const lo = Math.min(...fr), hi = Math.max(...fr);
+              c += (posCost(Math.max(1, Math.min(lo, hi - 3))) + Math.max(0, hi - lo - 3) * W.stretch) * ch.length;
+            }
+            if (!best || c < best.c - 1e-9) best = { t, c, oct };
+          }
+          if (best) break;
+        }
+        if (best && best.oct) ch.forEach((r) => { r.pitch += best.oct; r.octShift = true; });
+        if (best && best.t !== li) {
+          L[best.t] = L[best.t].slice(0, rs) + L[li].slice(rs, re) + L[best.t].slice(re);
+          L[li] = L[li].slice(0, rs) + '-'.repeat(re - rs) + L[li].slice(re);
+          ch.forEach((r) => { r.line = best.t; });
         }
       }
+
+      // 2. Mogelijke vingerzettingen per moment
+      for (const seg of segs) {
+        const free = (j, nt) => j === nt.line || isDash(L[j].slice(seg.start, seg.end).replace(/\d/g, '-'));
+        for (const nt of seg.notes) {
+          const pinned = LINKCH.test(L[nt.line][nt.start - 1] || '') || LINKCH.test(L[nt.line][nt.end] || '');
+          const build = (p, oct, onlyOwn) => {
+            const out = [];
+            for (let j = 0; j < n; j++) {
+              if (onlyOwn && j !== nt.line) continue;
+              const f = p - open[j];
+              if (f < 0 || f > maxFret || !free(j, nt)) continue;
+              const o = oct || nt.octShift;
+              out.push({ note: nt, line: j, fret: f, kind: o ? 'octave' : j !== nt.origLine ? 'moved' : null,
+                cost: W.dist * Math.abs(j - nt.origLine) + (o ? W.octave : 0) });
+            }
+            return out;
+          };
+          let c = pinned ? build(nt.pitch, false, true) : [];
+          if (!c.length) c = build(nt.pitch, false, false);
+          for (let k = 1; !c.length && k <= 3; k++) c = build(nt.pitch + (nt.pitch - open[0] > maxFret ? -12 : 12) * k, true, false);
+          nt.cands = c.sort((a, b) => a.cost - b.cost).slice(0, seg.notes.length > 2 ? 3 : 6);
+        }
+        const res = [], used = new Set(), pick = [];
+        (function dfs(i, cost) {
+          if (res.length >= 300) return;
+          if (i === seg.notes.length) { res.push({ picks: pick.slice(), cost }); return; }
+          for (const cd of seg.notes[i].cands) {
+            if (used.has(cd.line)) continue;
+            used.add(cd.line); pick.push(cd);
+            dfs(i + 1, cost + cd.cost);
+            pick.pop(); used.delete(cd.line);
+          }
+        })(0, 0);
+        for (const r of res) {
+          // Samenklinkende noten behouden hun onderlinge vorm (alle noten evenveel snaren verschoven)
+          if (r.picks.length > 1) r.cost += (new Set(r.picks.map((p) => p.line - p.note.origLine)).size - 1) * W.shape;
+          const fr = r.picks.map((p) => p.fret).filter((f) => f > 0);
+          if (!fr.length) { r.pmin = 1; r.pmax = PMAX; r.open = true; continue; }
+          const lo = Math.min(...fr), hi = Math.max(...fr);
+          if (hi - lo > 3) { r.cost += (hi - lo - 3) * W.stretch; r.pmin = r.pmax = lo; }
+          else { r.pmin = Math.max(1, hi - 3); r.pmax = lo; }
+        }
+        res.sort((a, b) => a.cost - b.cost);
+        seg.combos = res.slice(0, 40);
+      }
+
+      // 3. Goedkoopste route door alle momenten (Viterbi over handposities)
+      const solveRun = (run, start) => {
+        const INF = 1e9;
+        let V = new Array(PMAX + 1).fill(INF);
+        for (let P = 1; P <= PMAX; P++) V[P] = start == null ? 0 : W.shift * Math.abs(P - start);
+        const backs = [];
+        for (const seg of run) {
+          // afstandstransformatie: goedkoopste vorige positie voor elke nieuwe positie
+          const T = V.slice(), A = V.map((_, P) => P);
+          for (let P = 2; P <= PMAX; P++) if (T[P - 1] + W.shift < T[P]) { T[P] = T[P - 1] + W.shift; A[P] = A[P - 1]; }
+          for (let P = PMAX - 1; P >= 1; P--) if (T[P + 1] + W.shift < T[P]) { T[P] = T[P + 1] + W.shift; A[P] = A[P + 1]; }
+          const NV = new Array(PMAX + 1).fill(INF), bc = new Array(PMAX + 1).fill(-1), bp = new Array(PMAX + 1).fill(-1);
+          seg.combos.forEach((c, ci) => {
+            for (let P = c.pmin; P <= c.pmax; P++) {
+              const v = c.cost + (c.open ? 0 : posCost(P)) + T[P];
+              if (v < NV[P]) { NV[P] = v; bc[P] = ci; bp[P] = A[P]; }
+            }
+          });
+          backs.push({ bc, bp });
+          V = NV;
+        }
+        let P = 1;
+        for (let q = 2; q <= PMAX; q++) if (V[q] < V[P]) P = q;
+        const last = P;
+        for (let k = run.length - 1; k >= 0; k--) {
+          const { bc, bp } = backs[k];
+          for (const p of run[k].combos[bc[P]].picks) { p.note.newLine = p.line; p.note.newVal = p.fret; p.note.kind = p.kind; }
+          P = bp[P];
+        }
+        return last;
+      };
+      let run = [];
+      for (const seg of segs) {
+        if (seg.combos.length) { run.push(seg); continue; }
+        if (run.length) endPos = solveRun(run, endPos);
+        run = [];
+        seg.notes.forEach((nt) => {
+          let v = nt.pitch - open[nt.line];
+          nt.kind = null;
+          if (v < 0 || v > maxFret || nt.octShift) { while (v < 0) v += 12; while (v > maxFret) v -= 12; nt.kind = 'octave'; }
+          nt.newLine = nt.line; nt.newVal = v;
+        });
+      }
+      if (run.length) endPos = solveRun(run, endPos);
+      for (const seg of segs) for (const nt of seg.notes) if (nt.newLine !== nt.origLine && nt.kind !== 'octave') nt.kind = 'moved';
+    }
+    for (const seg of segs) for (const nt of seg.notes) {
+      if (nt.kind === 'moved') moved++;
+      else if (nt.kind === 'octave') octave++;
     }
 
     // Opnieuw opbouwen met behoud van uitlijning
@@ -719,23 +854,24 @@ const TabEngine = (() => {
       for (let li = 0; li < n; li++) out[li] += L[li].slice(cursor, seg.start);
       const pieces = [];
       for (let li = 0; li < n; li++) {
-        const orig = L[li].slice(seg.start, seg.end);
-        const reps = [];
+        const chars = L[li].slice(seg.start, seg.end).split('');
         for (const nt of seg.notes) {
-          const s = nt.start - seg.start, e = nt.end - seg.start;
-          if (nt.line === li && nt.newLine !== li) reps.push({ s, e, text: '-'.repeat(e - s), note: false });
-          if (nt.newLine === li) reps.push({ s, e, text: String(nt.newVal), note: true, kind: nt.kind });
+          if (nt.line === li && nt.newLine !== li) for (let x = nt.start - seg.start; x < nt.end - seg.start; x++) chars[x] = '-';
         }
-        reps.sort((a, b) => a.s - b.s);
+        const base = chars.join('');
+        const ins = seg.notes.filter((nt) => nt.newLine === li)
+          .map((nt) => ({ s: nt.start - seg.start, e: nt.end - seg.start, text: String(nt.newVal), kind: nt.kind }))
+          .sort((x, y) => x.s - y.s);
         let piece = '', prev = 0;
         const pm = [];
-        for (const r of reps) {
-          piece += orig.slice(prev, r.s);
-          if (r.note) pm.push({ s: piece.length, e: piece.length + r.text.length, kind: r.kind });
+        for (const r of ins) {
+          if (r.s < prev) continue;
+          piece += base.slice(prev, r.s);
+          pm.push({ s: piece.length, e: piece.length + r.text.length, kind: r.kind });
           piece += r.text;
           prev = r.e;
         }
-        piece += orig.slice(prev);
+        piece += base.slice(prev);
         pieces.push({ piece, pm });
       }
       const width = Math.max(...pieces.map((p) => p.piece.length));
@@ -753,7 +889,7 @@ const TabEngine = (() => {
       const len = labels[li].len;
       marks[li].labelEnd = len;
     }
-    return { lines: out, marks, moved, octave };
+    return { lines: out, marks, moved, octave, endPos };
   }
 
   function normalize(text) {
@@ -764,7 +900,7 @@ const TabEngine = (() => {
   function transpose(text, semis, opts = {}) {
     const lines = normalize(text).split('\n');
     const rows = [];
-    let moved = 0, octave = 0, blocks = 0, tuning = null, strings = 0;
+    let moved = 0, octave = 0, blocks = 0, tuning = null, strings = 0, carry = null;
     let i = 0;
     while (i < lines.length) {
       if (isTabLine(lines[i])) {
@@ -772,7 +908,8 @@ const TabEngine = (() => {
         while (j < lines.length && isTabLine(lines[j])) j++;
         const block = lines.slice(i, j);
         if (block.length >= 3) {
-          const r = transposeBlock(block, semis, opts);
+          const r = transposeBlock(block, semis, Object.assign({}, opts, { startPos: carry }));
+          carry = r.endPos;
           moved += r.moved;
           octave += r.octave;
           blocks++;
@@ -1096,7 +1233,7 @@ if (typeof module !== 'undefined') module.exports = TabEngine;
     if (n < 0 && n >= -5 && r.blocks) tips.push(`<p>Zelfde vingerzetting houden? Stem ${instWord} ${tones(n)} lager naar ${esc(TabEngine.shiftTuning(tuning, n).join(' '))} en speel het origineel.</p>`);
     if (n > 0 && n <= 7 && s.instrument === 'guitar' && r.blocks) tips.push(`<p>Of speel het origineel met een capo op de ${n}e fret.</p>`);
     const stat = [];
-    if (r.moved) stat.push(`<span class="lg moved">${r.moved} ${r.moved === 1 ? 'noot' : 'noten'}</span> naar een andere snaar verplaatst`);
+    if (r.moved) stat.push(`<span class="lg moved">${r.moved} ${r.moved === 1 ? 'noot' : 'noten'}</span> op een andere snaar gezet voor een handigere vingerzetting`);
     if (r.octave) stat.push(`<span class="lg octave">${r.octave} ${r.octave === 1 ? 'noot' : 'noten'}</span> een octaaf verschoven`);
     if (stat.length) tips.push(`<p>${stat.join(', ')}.</p>`);
     $('#tip').innerHTML = tips.join('');
