@@ -3,53 +3,49 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Tabkast: zoek tabs voor elektrische gitaar en basgitaar en transponeer ze per halve toon.">
+<meta name="description" content="Tabkast: haal tabs voor elektrische gitaar en basgitaar binnen via een link en transponeer ze per halve toon.">
 <title>Tabkast</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%B8%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='1' y='1' width='30' height='30' rx='8' fill='%23221914'/%3E%3Cg stroke='%23FAFBFA' stroke-linecap='round' opacity='.6'%3E%3Cpath d='M7 10h18' stroke-width='1.2'/%3E%3Cpath d='M7 16h18' stroke-width='1.6'/%3E%3Cpath d='M7 22h18' stroke-width='2'/%3E%3C/g%3E%3Ccircle cx='19' cy='16' r='3.4' fill='%2386CDBA'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600;700&family=Red+Hat+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Red+Hat+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #E3E8E2;
-  --panel: #F3F5F1;
-  --panel-2: #E9EDE7;
-  --ink: #2A1D17;
-  --muted: #675B53;
-  --rule: #C9D0C7;
-  --accent: #2A7669;
+  --bg: #EEF1EE;
+  --surface: #FAFBFA;
+  --surface-2: #E5E9E5;
+  --ink: #221914;
+  --muted: #6B635D;
+  --rule: #D6DBD6;
+  --accent: #1F6B5C;
   --accent-ink: #FFFFFF;
-  --pedal: #7FC8B6;
-  --pedal-edge: #58A895;
-  --pedal-ink: #0F2621;
-  --screen: #14201C;
-  --screen-ink: #C6F1E4;
-  --nickel-1: #F6F7F8;
-  --nickel-2: #A7AEB5;
-  --string: #9AA2A9;
-  --bar: #7B6F66;
-  --note: #2A1D17;
-  --chord: #2A7669;
+  --accent-soft: rgba(31, 107, 92, .10);
+  --string: #A3AAA6;
+  --bar: #877C74;
+  --chord: #1F6B5C;
   --moved: #A0520A;
   --octave: #7040AA;
   --err: #B3261E;
-  --ui: "Barlow Semi Condensed", "Arial Narrow", "Roboto Condensed", system-ui, sans-serif;
+  --shadow: 0 10px 30px -12px rgba(34, 25, 20, .35), 0 2px 6px -2px rgba(34, 25, 20, .12);
+  --ui: "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
   --mono: "Red Hat Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #1C1410; --panel: #261B15; --panel-2: #31231C; --ink: #F0E9E2; --muted: #B6A89C;
-    --rule: #402F27; --accent: #8FD4C2; --accent-ink: #10231E; --screen: #0E1613;
-    --string: #7C838A; --bar: #A09084; --note: #F7F1EB; --chord: #8FD4C2;
-    --moved: #F4B862; --octave: #CBA6F4; --err: #FF8A80; color-scheme: dark;
+    --bg: #19120F; --surface: #221915; --surface-2: #2E231D; --ink: #F2ECE6; --muted: #AFA297;
+    --rule: #3A2D26; --accent: #86CDBA; --accent-ink: #0F211C; --accent-soft: rgba(134, 205, 186, .13);
+    --string: #7B8288; --bar: #9E8F84; --chord: #86CDBA; --moved: #F4B862; --octave: #CBA6F4; --err: #FF8A80;
+    --shadow: 0 14px 34px -12px rgba(0, 0, 0, .7), 0 2px 6px -2px rgba(0, 0, 0, .4);
+    color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #1C1410; --panel: #261B15; --panel-2: #31231C; --ink: #F0E9E2; --muted: #B6A89C;
-  --rule: #402F27; --accent: #8FD4C2; --accent-ink: #10231E; --screen: #0E1613;
-  --string: #7C838A; --bar: #A09084; --note: #F7F1EB; --chord: #8FD4C2;
-  --moved: #F4B862; --octave: #CBA6F4; --err: #FF8A80; color-scheme: dark;
+  --bg: #19120F; --surface: #221915; --surface-2: #2E231D; --ink: #F2ECE6; --muted: #AFA297;
+  --rule: #3A2D26; --accent: #86CDBA; --accent-ink: #0F211C; --accent-soft: rgba(134, 205, 186, .13);
+  --string: #7B8288; --bar: #9E8F84; --chord: #86CDBA; --moved: #F4B862; --octave: #CBA6F4; --err: #FF8A80;
+  --shadow: 0 14px 34px -12px rgba(0, 0, 0, .7), 0 2px 6px -2px rgba(0, 0, 0, .4);
+  color-scheme: dark;
 }
 :root {
   box-sizing: border-box;
@@ -58,178 +54,154 @@
 }
 html { height: 100%; scroll-padding-top: env(safe-area-inset-top, 0px); }
 *, *::before, *::after { box-sizing: inherit; }
+[hidden] { display: none !important; }
 body {
   margin: 0; height: 100%;
   background: var(--bg); color: var(--ink);
-  font-family: var(--ui); font-size: 17px; line-height: 1.4;
+  font-family: var(--ui); font-size: 16px; line-height: 1.45;
   -webkit-font-smoothing: antialiased;
 }
 button, input, select, textarea { font: inherit; color: inherit; }
 button { cursor: pointer; }
+a { color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-[hidden] { display: none !important; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+svg.i { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+svg.i.fill { fill: currentColor; stroke: none; }
 
+/* ---------- Knoppen ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 40px; padding: 0 16px; border-radius: 10px; white-space: nowrap;
+  border: 1px solid var(--rule); background: var(--surface); font-weight: 600; font-size: 15px;
+  text-decoration: none;
+}
+.btn:hover { background: var(--surface-2); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { filter: brightness(1.07); background: var(--accent); }
+.btn.quiet { background: transparent; border-color: transparent; color: var(--muted); }
+.btn.quiet:hover { background: var(--surface-2); color: var(--ink); }
+.btn.sm { height: 32px; padding: 0 12px; font-size: 14px; border-radius: 8px; }
+.btn[disabled] { opacity: .45; cursor: not-allowed; filter: none; }
+.icon-btn {
+  display: inline-grid; place-items: center; width: 40px; height: 40px; flex: none;
+  border: 1px solid transparent; border-radius: 10px; background: transparent; color: var(--ink);
+}
+.icon-btn:hover { background: var(--surface-2); }
+.icon-btn[aria-pressed="true"], .icon-btn[aria-expanded="true"] { background: var(--accent-soft); color: var(--accent); }
+.linkbtn {
+  border: 0; background: none; padding: 0; font-weight: 600; color: var(--accent);
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;
+}
+.seg { display: inline-flex; padding: 3px; gap: 2px; border-radius: 10px; background: var(--surface-2); }
+.seg button {
+  border: 0; background: transparent; border-radius: 8px; height: 32px; padding: 0 14px;
+  font-weight: 600; font-size: 14px; color: var(--muted); white-space: nowrap;
+}
+.seg button[aria-checked="true"], .seg button[aria-selected="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+
+/* ---------- Layout ---------- */
 .app { height: 100%; display: grid; grid-template-rows: auto 1fr; }
-
-/* ---------- Kop ---------- */
 .top {
-  display: flex; align-items: center; flex-wrap: wrap; gap: 12px 18px;
-  padding: 12px 24px; background: var(--panel); border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; gap: 16px;
+  height: 64px; padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--rule);
 }
 .brand { display: flex; align-items: center; gap: 10px; margin-right: auto; }
-.brand .mark { width: 30px; height: 30px; flex: none; }
-.brand b { font-size: 27px; font-weight: 700; letter-spacing: -0.015em; line-height: 1; }
-.seg {
-  display: inline-flex; padding: 3px; gap: 2px; border-radius: 999px;
-  background: var(--panel-2); border: 1px solid var(--rule);
-}
-.seg button {
-  border: 0; background: transparent; border-radius: 999px;
-  padding: 7px 16px; font-weight: 600; color: var(--muted); white-space: nowrap;
-}
-.seg button[aria-checked="true"] { background: var(--ink); color: var(--panel); }
-.seg.small button { padding: 4px 12px; font-size: 15px; }
-.btn {
-  border: 1px solid var(--rule); background: var(--panel); border-radius: 10px;
-  padding: 8px 14px; font-weight: 600; white-space: nowrap;
-}
-.btn:hover { background: var(--panel-2); }
-.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-.btn.primary:hover { filter: brightness(1.06); }
-.btn.danger[data-armed="true"] { background: #B3261E; border-color: #B3261E; color: #fff; }
-.btn[disabled] { opacity: .5; cursor: not-allowed; }
-
-/* ---------- Hoofdlayout ---------- */
-.main { display: grid; grid-template-columns: minmax(290px, 360px) 1fr; min-height: 0; }
-.library {
-  display: flex; flex-direction: column; min-height: 0; overflow: auto;
-  background: var(--panel); border-right: 1px solid var(--rule);
-}
-.search { position: sticky; top: 0; z-index: 2; padding: 16px 20px 12px; background: var(--panel); }
+.brand svg { width: 28px; height: 28px; }
+.brand b { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
+.main { display: grid; grid-template-columns: 320px 1fr; min-height: 0; }
+.library { display: flex; flex-direction: column; min-height: 0; overflow: auto; background: var(--surface); border-right: 1px solid var(--rule); }
+.search { position: sticky; top: 0; z-index: 2; padding: 14px 14px 8px; background: var(--surface); }
+.search .field-ic { position: relative; }
+.search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); width: 18px; height: 18px; }
 .search input {
-  width: 100%; padding: 11px 14px 11px 40px; border-radius: 12px;
-  border: 1px solid var(--rule); background: var(--bg) no-repeat 13px 50% / 18px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23887a70' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='m20 20-4.8-4.8'/%3E%3C/svg%3E");
-  font-size: 17px;
+  width: 100%; height: 40px; padding: 0 12px 0 38px; border-radius: 10px;
+  border: 1px solid var(--rule); background: var(--bg);
 }
 .search input::placeholder { color: var(--muted); }
-.grp { margin: 14px 20px 4px; font-size: 15px; font-weight: 600; color: var(--muted); }
+#list { padding: 4px 8px 16px; }
 .item {
   display: grid; grid-template-columns: 1fr auto; column-gap: 12px; width: 100%;
-  padding: 9px 20px 10px 17px; border: 0; border-left: 3px solid transparent;
-  background: none; text-align: left;
+  padding: 10px 12px; border: 0; border-radius: 10px; background: none; text-align: left;
 }
-.item:hover { background: var(--panel-2); }
-.item[aria-current="true"] { background: var(--panel-2); border-left-color: var(--accent); }
-.item .t { font-size: 18px; font-weight: 600; line-height: 1.2; }
-.item .a { font-size: 15px; color: var(--muted); }
-.item .k { grid-column: 2; grid-row: 1 / 3; align-self: center; text-align: right; font-weight: 700; color: var(--accent); line-height: 1.1; }
-.item .k small { display: block; font-size: 13px; font-weight: 500; color: var(--muted); }
-.none { margin: 18px 20px 4px; }
-.none p { margin: 0 0 6px; }
-.none strong { font-weight: 700; }
-.online {
-  margin: auto 20px 20px; padding: 14px 16px 16px; border-radius: 14px;
-  border: 1px dashed var(--rule); background: var(--bg);
+.item + .item { margin-top: 2px; }
+.item:hover { background: var(--surface-2); }
+.item[aria-current="true"] { background: var(--accent-soft); }
+.item .t { font-weight: 600; line-height: 1.25; }
+.item .a { font-size: 14px; color: var(--muted); }
+.item .k { grid-column: 2; grid-row: 1 / 3; align-self: center; text-align: right; font-weight: 600; font-size: 15px; line-height: 1.15; }
+.item .k small { display: block; font-size: 12px; font-weight: 500; color: var(--accent); font-variant-numeric: tabular-nums; }
+.listmsg { margin: 10px 12px; color: var(--muted); font-size: 15px; }
+.library .hero { display: none; }
+
+.viewer { position: relative; min-height: 0; overflow: auto; overscroll-behavior: contain; }
+
+/* ---------- Lege staat ---------- */
+.hero { max-width: 560px; padding: 72px 48px; }
+.hero h1 { font-size: 36px; line-height: 1.08; letter-spacing: -0.025em; font-weight: 600; margin: 0 0 12px; }
+.hero p { margin: 0 0 22px; color: var(--muted); font-size: 17px; max-width: 46ch; }
+.hero .small { font-size: 15px; margin-top: 14px; }
+.urlrow { display: flex; gap: 8px; }
+.urlrow input {
+  flex: 1; min-width: 0; height: 44px; padding: 0 14px; border-radius: 10px;
+  border: 1px solid var(--rule); background: var(--surface);
 }
-.online.focus { border-style: solid; border-color: var(--accent); }
-.online h2 { margin: 0 0 4px; font-size: 18px; }
-.online p { margin: 0 0 10px; font-size: 15px; color: var(--muted); }
-.online .links { display: flex; flex-wrap: wrap; gap: 6px; }
-.online a {
-  display: inline-block; padding: 6px 11px; border-radius: 8px; font-weight: 600; font-size: 15px;
-  color: var(--ink); text-decoration: none; background: var(--panel); border: 1px solid var(--rule);
-}
-.online a:hover { border-color: var(--accent); }
-.online .paste { margin-top: 10px; width: 100%; }
+.urlrow .btn { height: 44px; }
+.idle { height: 100%; display: grid; place-items: center; color: var(--muted); padding: 40px; text-align: center; }
 
 /* ---------- Viewer ---------- */
-.viewer { position: relative; min-height: 0; overflow: auto; overscroll-behavior: contain; }
-.welcome { max-width: 640px; padding: 56px 40px; }
-.welcome h1 { font-size: clamp(32px, 4.2vw, 50px); line-height: 1.02; letter-spacing: -0.02em; margin: 0 0 24px; }
-.welcome ol { padding-left: 1.3em; margin: 0 0 20px; font-size: 19px; }
-.welcome li { margin-bottom: 6px; padding-left: 4px; }
-.welcome p { color: var(--muted); font-size: 18px; }
-.linkbtn { border: 0; background: none; padding: 0; color: var(--accent); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
-
-.vhead { padding: 28px 32px 18px; }
+.vhead { padding: 28px 32px 16px; }
+.vtop { display: flex; align-items: flex-start; gap: 12px; }
+.vtitles { flex: 1; min-width: 0; }
 .back { display: none; }
-.vtitle { font-size: clamp(30px, 4vw, 48px); line-height: 1; letter-spacing: -0.02em; margin: 0 0 4px; font-weight: 700; }
-.vartist { margin: 0 0 12px; font-size: 19px; color: var(--muted); }
-.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; padding: 0; list-style: none; }
-.chips li { padding: 3px 10px; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--rule); font-size: 15px; }
-.vactions { display: flex; flex-wrap: wrap; gap: 8px; }
+.vtitle { font-size: 34px; line-height: 1.1; letter-spacing: -0.025em; margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.vartist { margin: 4px 0 0; font-size: 17px; color: var(--muted); }
+.vinfo { margin: 10px 0 0; font-size: 14px; color: var(--muted); }
+.vinfo a { color: var(--muted); text-underline-offset: 3px; }
+.vinfo a:hover { color: var(--ink); }
 
-.pedalbar {
+.toolbar {
   position: sticky; top: 0; z-index: 5;
-  display: flex; align-items: center; flex-wrap: wrap; gap: 14px 22px;
-  padding: 12px 32px; background: var(--bg); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule);
+  display: flex; align-items: center; flex-wrap: wrap; gap: 12px 16px;
+  padding: 10px 32px; background: color-mix(in srgb, var(--bg) 94%, transparent);
+  backdrop-filter: saturate(1.2) blur(10px); -webkit-backdrop-filter: saturate(1.2) blur(10px);
+  border-block: 1px solid var(--rule);
 }
-.pedal {
-  display: flex; align-items: center; gap: 12px; padding: 9px 12px;
-  background: var(--pedal); color: var(--pedal-ink); border-radius: 20px;
-  box-shadow: inset 0 -4px 0 var(--pedal-edge), inset 0 1px 0 rgba(255,255,255,.45), 0 6px 16px -8px rgba(0,0,0,.45);
+.stepper {
+  display: inline-flex; align-items: stretch; height: 48px; flex: none;
+  border: 1px solid var(--rule); border-radius: 12px; background: var(--surface); overflow: hidden;
 }
-.foot {
-  width: 50px; height: 50px; border-radius: 50%; border: 0; flex: none;
-  display: grid; place-items: center;
-  background: radial-gradient(circle at 35% 30%, var(--nickel-1), var(--nickel-2) 72%);
-  box-shadow: 0 3px 0 rgba(0,0,0,.28), inset 0 -2px 4px rgba(0,0,0,.18);
-  color: #23201e; font-size: 28px; font-weight: 700; line-height: 1;
+.stepper button { width: 46px; border: 0; background: transparent; display: grid; place-items: center; color: var(--ink); }
+@media (hover: hover) { .stepper button:hover { background: var(--surface-2); } }
+.stepper button:active { background: var(--accent-soft); }
+.stepper button:disabled { color: var(--rule); cursor: not-allowed; background: transparent; }
+.stepval {
+  min-width: 96px; padding: 0 12px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border-inline: 1px solid var(--rule);
 }
-.foot:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,.28), inset 0 -1px 3px rgba(0,0,0,.2); }
-.foot:disabled { opacity: .45; cursor: not-allowed; }
-.screen {
-  min-width: 96px; padding: 6px 12px 5px; border-radius: 9px; text-align: center;
-  background: var(--screen); color: var(--screen-ink); box-shadow: inset 0 2px 7px rgba(0,0,0,.6);
-}
-.screen output { display: block; font-size: 34px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
-.screen span { display: block; font-size: 13px; opacity: .8; margin-top: 2px; }
-.keyline { display: flex; flex-direction: column; gap: 2px; min-width: 150px; }
-.keyline .now { font-size: 22px; font-weight: 700; line-height: 1.1; }
-.keyline .orig { font-size: 15px; color: var(--muted); }
-.keyline .linkbtn { text-align: left; white-space: nowrap; }
-.keyline .orig { display: flex; flex-wrap: wrap; gap: 0 14px; }
-.keyline .std { color: var(--accent); font-weight: 600; }
-.savectl:empty { display: none; }
-.btn.save { background: var(--ink); color: var(--panel); border-color: var(--ink); }
-.btn.save:hover { background: var(--ink); filter: brightness(1.15); }
-.online .bmtip { margin: 10px 0 0; }
-.scrollctl { display: flex; align-items: center; gap: 10px; margin-left: auto; }
-.scrollbtn[aria-pressed="true"] { background: var(--ink); color: var(--panel); border-color: var(--ink); }
-.scrollctl input[type=range] { width: 110px; }
-input[type=range] { accent-color: var(--accent); }
+.stepval .kv { font-size: 18px; font-weight: 700; line-height: 1; letter-spacing: -0.01em; }
+.stepval .ov { font-size: 12px; line-height: 1; margin-top: 5px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.stepval .ov.on { color: var(--accent); font-weight: 600; }
+.tstatus { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 14px; font-size: 14px; color: var(--muted); }
+.tstatus .std { display: inline-flex; align-items: center; gap: 5px; color: var(--accent); font-weight: 600; }
+.tstatus .std svg { width: 16px; height: 16px; stroke-width: 2.2; }
+.tright { display: flex; gap: 4px; margin-left: auto; }
 
-.tools {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px;
-  padding: 14px 32px 4px; font-size: 15px; color: var(--muted);
-}
-.tools label { display: flex; align-items: center; gap: 8px; }
-.tools select {
-  max-width: 100%; min-width: 0;
-  padding: 5px 8px; border-radius: 8px; border: 1px solid var(--rule); background: var(--panel); color: var(--ink);
-}
-.sizer { display: inline-flex; gap: 4px; align-items: center; }
-.sizer .btn { padding: 3px 10px; }
-.keys { margin-left: auto; }
-.keys kbd { font-family: var(--mono); font-size: 13px; padding: 1px 5px; border: 1px solid var(--rule); border-radius: 4px; background: var(--panel); }
-
-.tip { margin: 10px 32px 0; max-width: 72ch; font-size: 16px; color: var(--muted); }
-.tip p { margin: 0 0 4px; }
-.lg { font-weight: 700; }
+.tip { margin: 12px 32px 0; max-width: 76ch; font-size: 14px; color: var(--muted); }
+.tip p { margin: 0 0 3px; }
+.lg { font-weight: 600; }
 .lg.moved { color: var(--moved); text-decoration: underline dotted 2px; text-underline-offset: 3px; }
 .lg.octave { color: var(--octave); text-decoration: underline double; text-underline-offset: 2px; }
 
 .sheet {
   --fs: 15px;
   font-family: var(--mono); font-size: var(--fs); font-variant-ligatures: none;
-  padding: 14px 32px 120px; overflow-x: auto; color: var(--note);
+  padding: 16px 32px 120px; overflow-x: auto; color: var(--ink);
 }
 .sheet .row { white-space: pre; line-height: 1.45; min-height: 1.45em; }
 .sheet .txt { color: var(--muted); }
-.sheet .sec { font-family: var(--ui); font-weight: 700; font-size: 1.15em; color: var(--ink); margin-top: .6em; }
-.sheet .note { font-family: var(--ui); font-size: 1.1em; color: var(--muted); white-space: normal; max-width: 70ch; }
+.sheet .sec { font-family: var(--ui); font-weight: 600; font-size: 1.05em; color: var(--ink); margin-top: .7em; }
+.sheet .note { font-family: var(--ui); font-size: 1em; color: var(--muted); white-space: normal; max-width: 70ch; }
 .sheet .chord { color: var(--chord); font-weight: 700; }
 .block { width: max-content; margin: 2px 0 14px; }
 .tl { white-space: pre; line-height: 1.5; }
@@ -248,70 +220,106 @@ input[type=range] { accent-color: var(--accent); }
 .sheet.strings .tl .d { color: transparent; }
 .sheet.strings .tl .n, .sheet.strings .tl .t { background: var(--bg); }
 
+/* ---------- Popovers ---------- */
+.pop {
+  position: fixed; z-index: 60; width: 280px; max-width: calc(100vw - 16px);
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; box-shadow: var(--shadow);
+  padding: 6px;
+}
+.menu button {
+  display: flex; align-items: center; gap: 10px; width: 100%; height: 40px; padding: 0 10px;
+  border: 0; border-radius: 8px; background: none; text-align: left; font-size: 15px;
+}
+.menu button:hover, .menu button:focus-visible { background: var(--surface-2); outline: none; }
+.menu button svg { color: var(--muted); }
+.menu button.danger { color: var(--err); }
+.menu button.danger svg { color: var(--err); }
+.menu hr { border: 0; border-top: 1px solid var(--rule); margin: 6px 4px; }
+.settings { padding: 14px; width: 300px; }
+.settings .grp { margin-bottom: 14px; }
+.settings .grp:last-of-type { margin-bottom: 8px; }
+.settings .lbl { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+.settings .seg { width: 100%; }
+.settings .seg button { flex: 1; }
+.radio { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; font-size: 15px; cursor: pointer; }
+.radio input { margin: 3px 0 0; accent-color: var(--accent); }
+.radio small { display: block; color: var(--muted); font-size: 13px; }
+.sizer { display: flex; align-items: center; gap: 8px; }
+.sizer output { min-width: 48px; text-align: center; font-variant-numeric: tabular-nums; font-size: 14px; }
+input[type=range] { width: 100%; accent-color: var(--accent); }
+.foot { margin: 10px 0 0; padding-top: 10px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--muted); }
+kbd { font-family: var(--mono); font-size: 12px; padding: 0 5px; border: 1px solid var(--rule); border-radius: 4px; background: var(--bg); }
+
 .toast {
-  position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); z-index: 50;
-  transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
-  background: var(--ink); color: var(--panel); padding: 10px 16px; border-radius: 10px; font-weight: 600;
-  transition: opacity .2s, transform .2s;
+  position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); z-index: 80;
+  transform: translate(-50%, 16px); opacity: 0; pointer-events: none;
+  background: var(--ink); color: var(--surface); padding: 10px 16px; border-radius: 10px; font-weight: 600; font-size: 15px;
+  transition: opacity .2s, transform .2s; max-width: calc(100vw - 32px);
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 /* ---------- Dialoog ---------- */
 dialog {
-  width: min(760px, calc(100vw - 24px)); max-height: calc(100dvh - 24px);
+  width: min(680px, calc(100vw - 24px)); max-height: calc(100dvh - 24px);
   padding: 0; border: 1px solid var(--rule); border-radius: 18px;
-  background: var(--panel); color: var(--ink);
+  background: var(--surface); color: var(--ink); box-shadow: var(--shadow);
 }
-dialog::backdrop { background: rgba(20, 12, 8, .55); }
-.dlg { padding: 24px 26px 22px; display: flex; flex-direction: column; gap: 14px; }
-.dlg h2 { margin: 0; font-size: 28px; line-height: 1.05; }
-.dlg .lead { margin: 0; color: var(--muted); font-size: 16px; }
-.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
-.field { display: flex; flex-direction: column; gap: 5px; font-weight: 600; font-size: 15px; }
-.field input, .field textarea {
-  padding: 9px 11px; border-radius: 10px; border: 1px solid var(--rule); background: var(--bg); font-weight: 400;
-}
-.field textarea { font-family: var(--mono); font-size: 14px; line-height: 1.45; min-height: 260px; resize: vertical; white-space: pre; overflow-wrap: normal; overflow-x: auto; }
-.detect { margin: 0; font-size: 15px; color: var(--muted); min-height: 1.4em; }
-.detect.ok { color: var(--accent); }
-.err { color: var(--err); font-size: 15px; margin: 0; min-height: 0; }
-.urlrow { display: flex; gap: 8px; }
-.urlrow input { flex: 1; min-width: 0; padding: 9px 11px; border-radius: 10px; border: 1px solid var(--rule); background: var(--bg); font-weight: 400; }
-.status { margin: -6px 0 0; font-size: 15px; color: var(--muted); }
+dialog::backdrop { background: rgba(20, 12, 8, .5); }
+.dlg { padding: 22px 24px 20px; display: flex; flex-direction: column; gap: 16px; }
+.dlg-head { display: flex; align-items: center; justify-content: space-between; margin: -4px -8px -4px 0; }
+.dlg-head h2 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.015em; }
+.dlg .seg { align-self: flex-start; }
+.panel { display: flex; flex-direction: column; gap: 10px; }
+.hint { margin: 0; font-size: 14px; color: var(--muted); }
+.hint a { color: var(--muted); font-weight: 600; text-underline-offset: 3px; }
+.hint a:hover { color: var(--ink); }
+.status { font-size: 15px; color: var(--muted); }
 .status:empty { display: none; }
 .status.err { color: var(--err); }
 .status.ok { color: var(--accent); }
-.status .acts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 8px; }
-.status a.btn { text-decoration: none; color: var(--ink); }
-.importnote { margin: 0; padding: 9px 12px; border-radius: 10px; background: var(--panel-2); font-size: 15px; }
-details.howto { border: 1px solid var(--rule); border-radius: 12px; padding: 10px 14px; background: var(--bg); font-size: 15px; }
-details.howto summary { font-weight: 600; cursor: pointer; }
-details.howto ol { margin: 10px 0 8px; padding-left: 1.3em; }
-details.howto li { margin-bottom: 6px; }
-details.howto p { margin: 0 0 6px; color: var(--muted); }
+.status.wait { color: var(--ink); background: var(--accent-soft); border-radius: 10px; padding: 10px 12px; }
+.status .acts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 10px; }
+details.howto { border: 1px solid var(--rule); border-radius: 12px; padding: 0 14px; font-size: 14px; }
+details.howto summary { font-weight: 600; cursor: pointer; padding: 11px 0; list-style-position: inside; }
+details.howto[open] summary { border-bottom: 1px solid var(--rule); margin-bottom: 10px; }
+details.howto ol { margin: 0 0 10px; padding-left: 1.2em; }
+details.howto li { margin-bottom: 8px; }
+details.howto p { margin: 0 0 10px; color: var(--muted); }
 a.bm {
-  display: inline-block; padding: 4px 13px; border-radius: 999px; cursor: grab;
-  background: var(--pedal); color: var(--pedal-ink); font-weight: 700; text-decoration: none;
-  box-shadow: inset 0 -3px 0 var(--pedal-edge);
+  display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: 999px; cursor: grab;
+  background: var(--ink); color: var(--surface); font-weight: 600; font-size: 13px; text-decoration: none; vertical-align: middle;
 }
-a.bm[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
-.tabtools { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; }
-.field select { padding: 9px 11px; border-radius: 10px; border: 1px solid var(--rule); background: var(--bg); font-weight: 400; }
-.dlg .actions { display: flex; justify-content: flex-end; gap: 10px; }
+a.bm[aria-disabled="true"] { opacity: .5; cursor: not-allowed; }
+.importnote { margin: 0; padding: 10px 12px; border-radius: 10px; background: var(--surface-2); font-size: 14px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+.field { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px; }
+.field input, .field select {
+  height: 40px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--rule); background: var(--bg); font-weight: 400; font-size: 15px;
+}
+.field textarea {
+  padding: 10px 12px; border-radius: 10px; border: 1px solid var(--rule); background: var(--bg); font-weight: 400;
+  font-family: var(--mono); font-size: 13.5px; line-height: 1.45; min-height: 220px; resize: vertical;
+  white-space: pre; overflow-wrap: normal; overflow-x: auto;
+}
+.tabtools { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; margin-top: -4px; }
+.detect { margin: 0; font-size: 14px; color: var(--muted); }
+.detect.ok { color: var(--accent); }
+.err { color: var(--err); font-size: 14px; margin: 0; }
+.err:empty { display: none; }
+.dlg .actions { display: flex; justify-content: flex-end; gap: 8px; padding-top: 4px; }
 
 /* ---------- Mobiel ---------- */
 @media (max-width: 799px) {
-  body { font-size: 16px; }
-  .top { padding: 10px 14px; gap: 10px; }
-  .brand b { font-size: 24px; }
+  .top { height: auto; flex-wrap: wrap; padding: 10px 14px; gap: 10px; }
   .top .seg { order: 3; width: 100%; }
   .top .seg button { flex: 1; }
+  .top .addlbl { display: none; }
+  .top #addBtn { width: 40px; padding: 0; }
   .main { grid-template-columns: 1fr; }
   .library { border-right: 0; }
-  .search { padding: 12px 14px 8px; }
-  .grp { margin: 12px 14px 4px; }
-  .item { padding-left: 11px; padding-right: 14px; }
-  .online { margin: 16px 14px 18px; }
+  .library .hero { display: block; padding: 36px 18px; }
+  .only-desk { display: none; }
+  .hero h1 { font-size: 30px; }
   .viewer {
     position: fixed; inset: 0; z-index: 20; background: var(--bg);
     padding-top: env(safe-area-inset-top, 0px);
@@ -319,43 +327,29 @@ a.bm[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
     transition: transform .26s ease, visibility 0s linear .26s;
   }
   .app.viewing .viewer { transform: none; visibility: visible; transition: transform .26s ease, visibility 0s; }
-  .welcome { display: none; }
-  .vhead { padding: 12px 16px 12px; }
-  .back { display: inline-flex; margin-bottom: 12px; }
-  .pedalbar {
+  .vhead { padding: 8px 16px 14px; }
+  .vtop { flex-wrap: wrap; gap: 0; }
+  .back { display: inline-grid; margin-left: -10px; order: 0; }
+  .vtop [data-act="menu"] { order: 1; margin-left: auto; margin-right: -10px; }
+  .vtitles { order: 2; width: 100%; flex: none; padding-top: 6px; }
+  .vtitle { font-size: 28px; }
+  .toast { bottom: auto; top: calc(12px + env(safe-area-inset-top, 0px)); transform: translate(-50%, -16px); }
+  .toast.show { transform: translate(-50%, 0); }
+  .toolbar {
     position: fixed; top: auto; left: 0; right: 0; bottom: 0; z-index: 25;
-    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
-    border-bottom: 0; gap: 10px 14px; flex-wrap: nowrap;
-    box-shadow: 0 -8px 20px -12px rgba(0,0,0,.4);
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px)); gap: 10px;
+    background: var(--surface); border-bottom: 0; box-shadow: 0 -8px 24px -14px rgba(0,0,0,.45);
   }
-  .pedal { gap: 8px; padding: 7px 8px; }
-  .foot { width: 44px; height: 44px; font-size: 26px; }
-  .screen { min-width: 70px; padding: 5px 6px; }
-  .screen output { font-size: 28px; }
-  .keyline { min-width: 0; flex: 1; }
-  .keyline .now { font-size: 20px; white-space: nowrap; }
-  .keyline .kw { display: none; }
-  .keyline .orig { font-size: 14px; }
-  .keyline .linkbtn { white-space: normal; }
-  .tools label { flex-direction: column; align-items: stretch; gap: 4px; width: 100%; }
-  .tools select { width: 100%; padding: 8px; }
-  .chips li { font-size: 14px; }
-  .scrollctl { margin-left: 0; }
-  .pedalbar { flex-wrap: wrap; }
-  .savectl { order: 5; width: 100%; }
-  .savectl .btn { width: 100%; }
-  .scrollctl input[type=range] { display: none; }
-  .scrollbtn .lbl { display: none; }
-  .tools { padding: 8px 16px 0; gap: 10px 14px; }
-  .tools .speedfield { display: flex; }
-  .keys { display: none; }
-  .tip { margin: 10px 16px 0; }
-  .sheet { padding: 12px 16px 220px; }
+  .stepper { height: 52px; }
+  .stepper button { width: 52px; }
+  .tstatus { order: 5; width: 100%; }
+  .tstatus .plain { display: none; }
+  .tstatus:not(:has(button, .std)) { display: none; }
+  .tip { margin: 0 16px; }
+  .sheet { padding: 14px 16px 220px; }
   .grid2 { grid-template-columns: 1fr; }
-  .dlg { padding: 18px 16px; }
-}
-@media (min-width: 800px) {
-  .tools .speedfield { display: none; }
+  dialog { width: 100vw; max-width: 100vw; max-height: 100dvh; height: 100dvh; border-radius: 0; border: 0; margin: 0; }
+  .dlg { padding: calc(14px + env(safe-area-inset-top, 0px)) 16px calc(16px + env(safe-area-inset-bottom, 0px)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .viewer, .app.viewing .viewer, .toast { transition: none; }
@@ -363,98 +357,146 @@ a.bm[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13a.8.8 0 0 0 1.2.7l10.4-6.5a.8.8 0 0 0 0-1.4L9.2 4.8A.8.8 0 0 0 8 5.5z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18.5" cy="12" r="1.6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2"/><path d="M15.5 8.5V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2.5"/></symbol>
+  <symbol id="i-dup" viewBox="0 0 24 24"><path d="M6 3.5h8l4.5 4.5v12.5H6z"/><path d="M13.5 3.5V8h5M12.25 11v6M9.25 14h6"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4.5 19.5h4l10-10-4-4-10 10z"/><path d="M13 7l4 4"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4.5 7h15M9.5 7V4.5h5V7M6.5 7l1 12.5h9l1-12.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4.5h5.5V10M19.5 4.5L11 13M17.5 14v4.5a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1H10"/></symbol>
+</svg>
+
 <div class="app" id="app">
   <header class="top">
     <div class="brand">
-      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
         <rect x="1" y="1" width="30" height="30" rx="8" fill="var(--ink)"/>
-        <g stroke="var(--panel)" stroke-linecap="round" opacity=".55">
-          <line x1="6" y1="8.5" x2="26" y2="8.5" stroke-width="1"/>
-          <line x1="6" y1="13.5" x2="26" y2="13.5" stroke-width="1.3"/>
-          <line x1="6" y1="18.5" x2="26" y2="18.5" stroke-width="1.6"/>
-          <line x1="6" y1="23.5" x2="26" y2="23.5" stroke-width="1.9"/>
+        <g stroke="var(--surface)" stroke-linecap="round" opacity=".6">
+          <path d="M7 10h18" stroke-width="1.2"/><path d="M7 16h18" stroke-width="1.6"/><path d="M7 22h18" stroke-width="2"/>
         </g>
-        <circle cx="16" cy="16" r="4.2" fill="var(--pedal)"/>
+        <circle cx="19" cy="16" r="3.4" fill="#86CDBA"/>
       </svg>
       <b>Tabkast</b>
     </div>
     <div class="seg" role="radiogroup" aria-label="Instrument" id="instSeg">
-      <button type="button" role="radio" data-inst="guitar">Elektrische gitaar</button>
-      <button type="button" role="radio" data-inst="bass">Basgitaar</button>
+      <button type="button" role="radio" data-inst="guitar" aria-label="Elektrische gitaar">Gitaar</button>
+      <button type="button" role="radio" data-inst="bass" aria-label="Basgitaar">Bas</button>
     </div>
-    <button type="button" class="btn primary" id="addBtn">Tab toevoegen</button>
+    <button type="button" class="btn primary" id="addBtn" aria-label="Tab toevoegen">
+      <svg class="i"><use href="#i-plus"/></svg><span class="addlbl">Tab toevoegen</span>
+    </button>
   </header>
 
   <main class="main">
-    <aside class="library" aria-label="Nummers">
-      <div class="search">
-        <label class="sr" for="q">Zoek een nummer</label>
-        <input id="q" type="search" placeholder="Zoek op titel of artiest" autocomplete="off" spellcheck="false">
+    <aside class="library" aria-label="Jouw tabs">
+      <div class="search" id="searchBox">
+        <label class="sr" for="q">Zoek in je tabs</label>
+        <div class="field-ic">
+          <svg class="i"><use href="#i-search"/></svg>
+          <input id="q" type="search" placeholder="Zoek op titel of artiest" autocomplete="off" spellcheck="false">
+        </div>
       </div>
       <div id="list"></div>
-      <section class="online" id="online" aria-labelledby="onlineTitle">
-        <h2 id="onlineTitle">Staat je nummer er niet tussen?</h2>
-        <p>Zoek de tab online en haal hem binnen met een link of door hem te kopiëren en plakken.</p>
-        <div class="links">
-          <a id="lnkUG" target="_blank" rel="noopener">Ultimate Guitar</a>
-          <a id="lnkSS" target="_blank" rel="noopener">Songsterr</a>
-          <a id="lnkGG" target="_blank" rel="noopener">Google</a>
-        </div>
-        <button type="button" class="btn paste" id="addBtn2">Tab toevoegen</button>
-        <p class="bmtip">Met de bladwijzerknop <button type="button" class="linkbtn" id="bmTipBtn">Naar Tabkast</button> haal je een tab met één klik van de pagina die je bekijkt.</p>
-      </section>
     </aside>
-
     <section class="viewer" id="viewer" aria-label="Tab"></section>
   </main>
 </div>
 
+<div class="pop menu" id="menuPop" role="menu" aria-label="Acties" hidden></div>
+<div class="pop settings" id="setPop" role="dialog" aria-label="Weergave-instellingen" hidden>
+  <div class="grp">
+    <span class="lbl">Transponeren</span>
+    <label class="radio"><input type="radio" name="mode" value="smart"><span>Slim<small>Noten die buiten de hals vallen, gaan naar een andere snaar</small></span></label>
+    <label class="radio"><input type="radio" name="mode" value="simple"><span>Alleen fretnummers<small>Elke noot blijft op zijn snaar, zo nodig een octaaf verschoven</small></span></label>
+  </div>
+  <div class="grp">
+    <span class="lbl">Weergave</span>
+    <div class="seg" role="radiogroup" aria-label="Weergave" id="viewSeg">
+      <button type="button" role="radio" data-view="strings">Snaren</button>
+      <button type="button" role="radio" data-view="text">Tekst</button>
+    </div>
+  </div>
+  <div class="grp">
+    <span class="lbl">Tekstgrootte</span>
+    <div class="sizer">
+      <button type="button" class="icon-btn" data-set="smaller" aria-label="Kleiner"><svg class="i"><use href="#i-minus"/></svg></button>
+      <output id="fsOut">15 px</output>
+      <button type="button" class="icon-btn" data-set="bigger" aria-label="Groter"><svg class="i"><use href="#i-plus"/></svg></button>
+    </div>
+  </div>
+  <div class="grp">
+    <label class="lbl" for="speed">Scrollsnelheid</label>
+    <input type="range" min="1" max="10" step="1" id="speed">
+  </div>
+  <p class="foot">Sneltoetsen: <kbd>−</kbd> en <kbd>+</kbd> transponeren, <kbd>0</kbd> origineel, <kbd>S</kbd> autoscroll</p>
+</div>
+
 <dialog id="dlg" aria-labelledby="dlgTitle">
   <div class="dlg">
-    <h2 id="dlgTitle">Tab toevoegen</h2>
-    <p class="importnote" id="importNote" hidden></p>
-    <div id="urlBox" class="field">
-      <label for="fUrl">Link naar een tab</label>
+    <div class="dlg-head">
+      <h2 id="dlgTitle">Tab toevoegen</h2>
+      <button type="button" class="icon-btn" id="closeBtn" aria-label="Sluiten"><svg class="i"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="seg" role="tablist" aria-label="Manier van toevoegen" id="srcSeg">
+      <button type="button" role="tab" data-src="link" aria-controls="linkPanel">Via link</button>
+      <button type="button" role="tab" data-src="paste" aria-controls="detailsPanel">Zelf plakken</button>
+    </div>
+
+    <div class="panel" id="linkPanel" role="tabpanel">
       <div class="urlrow">
-        <input id="fUrl" type="url" inputmode="url" placeholder="https://" autocomplete="off" spellcheck="false">
-        <button type="button" class="btn" id="fetchBtn">Ophalen</button>
+        <input id="fUrl" type="url" inputmode="url" placeholder="Plak een link naar een tab" autocomplete="off" spellcheck="false" aria-label="Link naar een tab">
+        <button type="button" class="btn primary" id="fetchBtn">Ophalen</button>
       </div>
+      <div class="status" id="urlStatus" aria-live="polite"></div>
+      <p class="hint" id="searchHint">Nog geen link? Zoek op <a id="lnkUG" target="_blank" rel="noopener">Ultimate Guitar</a> of <a id="lnkGG" target="_blank" rel="noopener">Google</a>.</p>
+      <details class="howto" id="howto">
+        <summary>Ophalen van Ultimate Guitar en andere tabsites</summary>
+        <p>De meeste tabsites blokkeren het ophalen van hun pagina’s door andere websites. Met de bladwijzer <strong>Naar Tabkast</strong> lukt het wel, omdat die de tab leest in je eigen browser.</p>
+        <ol>
+          <li>Eenmalig: sleep deze knop naar je bladwijzerbalk <a class="bm" id="bmLink" draggable="true">Naar Tabkast</a><br>Geen bladwijzerbalk te zien? Druk op Ctrl+Shift+B, of ⌘+Shift+B op een Mac.</li>
+          <li>Plak hierboven een link en klik op <strong>Ophalen</strong>. De pagina opent in een nieuw tabblad.</li>
+          <li>Klik daar op de bladwijzer <strong>Naar Tabkast</strong>. De tab komt vanzelf hier binnen.</li>
+        </ol>
+        <p id="bmNote"></p>
+        <p>Op een telefoon kun je niet slepen. Maak dan een bladwijzer en gebruik deze code als adres: <button type="button" class="linkbtn" id="bmCopy">code kopiëren</button></p>
+      </details>
     </div>
-    <div class="status" id="urlStatus" aria-live="polite"></div>
-    <details class="howto" id="howto">
-      <summary>Bladwijzerknop ‘Naar Tabkast’ installeren</summary>
-      <p>De meeste tabsites laten andere websites hun pagina’s niet uitlezen. Met deze knop in je bladwijzerbalk haal je de tab op van de pagina die je op dat moment bekijkt.</p>
-      <ol>
-        <li>Maak je bladwijzerbalk zichtbaar met Ctrl+Shift+B (Windows) of ⌘+Shift+B (Mac).</li>
-        <li>Sleep deze knop naar de balk: <a class="bm" id="bmLink" draggable="true">Naar Tabkast</a></li>
-        <li>Open een tab op een tabsite en klik op de bladwijzer. Tabkast opent in een nieuw tabblad met de tab al ingevuld.</li>
-      </ol>
-      <p id="bmNote"></p>
-      <p>Pakt de knop niet de juiste tekst? Selecteer de tab dan eerst met je muis en klik daarna op de bladwijzer.</p>
-      <p>Op een telefoon kun je niet slepen. Maak dan een nieuwe bladwijzer en plak deze code als adres: <button type="button" class="linkbtn" id="bmCopy">bladwijzercode kopiëren</button></p>
-    </details>
-    <div class="grid2">
-      <label class="field">Titel<input id="fTitle" autocomplete="off"></label>
-      <label class="field">Artiest<input id="fArtist" autocomplete="off"></label>
-      <div class="field">Instrument
-        <div class="seg small" role="radiogroup" aria-label="Instrument voor deze tab" id="fInst">
-          <button type="button" role="radio" data-inst="guitar">Elektrische gitaar</button>
-          <button type="button" role="radio" data-inst="bass">Basgitaar</button>
+
+    <div class="panel" id="detailsPanel">
+      <p class="importnote" id="importNote" hidden></p>
+      <label class="field">Tab
+        <textarea id="fTab" spellcheck="false" wrap="off" placeholder="Plak hier de tab&#10;&#10;e|-------0-----|&#10;B|-----1---1---|&#10;G|---2-------2-|&#10;D|-2-----------|&#10;A|-------------|&#10;E|-------------|"></textarea>
+      </label>
+      <div class="tabtools">
+        <p class="detect" id="detect" aria-live="polite"></p>
+        <button type="button" class="linkbtn" id="onlyTabsBtn" hidden>Alleen tabregels bewaren</button>
+      </div>
+      <div class="grid2">
+        <label class="field">Titel<input id="fTitle" autocomplete="off"></label>
+        <label class="field">Artiest<input id="fArtist" autocomplete="off"></label>
+        <div class="field">Instrument
+          <div class="seg" role="radiogroup" aria-label="Instrument voor deze tab" id="fInst">
+            <button type="button" role="radio" data-inst="guitar">Gitaar</button>
+            <button type="button" role="radio" data-inst="bass">Bas</button>
+          </div>
         </div>
+        <label class="field">Toonsoort<input id="fKey" placeholder="Optioneel, bijvoorbeeld Em" autocomplete="off"></label>
+        <label class="field">Standaard transpositie<select id="fDef"></select></label>
       </div>
-      <label class="field">Toonsoort (optioneel)<input id="fKey" placeholder="bijvoorbeeld Em" autocomplete="off"></label>
-      <label class="field">Standaard transpositie<select id="fDef"></select></label>
     </div>
-    <label class="field">Tab
-      <textarea id="fTab" spellcheck="false" wrap="off" placeholder="Plak hier de tab, of plak hierboven een link.&#10;&#10;e|-------0-----|&#10;B|-----1---1---|&#10;G|---2-------2-|&#10;D|-2-----------|&#10;A|-------------|&#10;E|-------------|"></textarea>
-    </label>
-    <div class="tabtools">
-      <p class="detect" id="detect" aria-live="polite"></p>
-      <button type="button" class="linkbtn" id="onlyTabsBtn">Alleen tabregels bewaren</button>
-    </div>
+
     <p class="err" id="err" aria-live="assertive"></p>
     <div class="actions">
-      <button type="button" class="btn" id="cancelBtn">Annuleren</button>
+      <button type="button" class="btn quiet" id="cancelBtn">Annuleren</button>
       <button type="button" class="btn primary" id="saveBtn">Opslaan</button>
     </div>
   </div>
@@ -813,125 +855,13 @@ if (typeof module !== 'undefined') module.exports = TabEngine;
 
 </script>
 <script>
-const BUILTIN_SONGS = [
- {
-  "id": "pd-hall-g",
-  "instrument": "guitar",
-  "title": "In de hal van de Bergkoning",
-  "artist": "Edvard Grieg (1875)",
-  "key": "Em",
-  "origin": "pd",
-  "tags": "peer gynt klassiek hall mountain king riff metal",
-  "tab": "Thema op de lage E- en A-snaar. Begin rustig en voer het tempo bij elke herhaling op.\n\n[Thema]\ne|--------------|-----------|-----------|-----------|\nB|--------------|-----------|-----------|-----------|\nG|--------------|-----------|-----------|-----------|\nD|--------------|-----------|-----------|-----------|\nA|-----------0--|--2-----2--|--1-----1--|--0-----0--|\nE|--0--2--3-----|-----3-----|-----2-----|-----1-----|\n\ne|--------------|--------------|--------------|-----|\nB|--------------|--------------|--------------|-----|\nG|--------------|--------------|--------------|-----|\nD|--------------|-----------2--|--0-----------|--0--|\nA|-----------0--|--2-----2-----|-----2-----2--|-----|\nE|--0--2--3-----|-----3--------|--------3-----|-----|\n\n[Herhaling, sneller]\ne|--------------|-----------|-----------|-----------|\nB|--------------|-----------|-----------|-----------|\nG|--------------|-----------|-----------|-----------|\nD|--------------|-----------|-----------|-----------|\nA|-----------0--|--2-----2--|--1-----1--|--0-----0--|\nE|--0--2--3-----|-----3-----|-----2-----|-----1-----|\n\ne|--------------|--------------|--------------|-----|\nB|--------------|--------------|--------------|-----|\nG|--------------|--------------|--------------|-----|\nD|--------------|-----------2--|--0-----------|--0--|\nA|-----------0--|--2-----2-----|-----2-----2--|-----|\nE|--0--2--3-----|-----3--------|--------3-----|-----|\n\n[Een octaaf hoger]\ne|--------------|-----------|-----------|-----------|\nB|--------------|-----------|-----------|-----------|\nG|-----------2--|--4-----4--|--3-----3--|--2-----2--|\nD|--2--4--5-----|-----5-----|-----4-----|-----3-----|\nA|--------------|-----------|-----------|-----------|\nE|--------------|-----------|-----------|-----------|\n\ne|--------------|--------------|--------------|-----|\nB|--------------|-----------5--|--3-----------|--3--|\nG|-----------2--|--4-----4-----|-----4-----4--|-----|\nD|--2--4--5-----|-----5--------|--------5-----|-----|\nA|--------------|--------------|--------------|-----|\nE|--------------|--------------|--------------|-----|"
- },
- {
-  "id": "pd-green-g",
-  "instrument": "guitar",
-  "title": "Greensleeves",
-  "artist": "Traditioneel (Engeland, 16e eeuw)",
-  "key": "Am",
-  "origin": "pd",
-  "tags": "folk traditioneel melodie 3/4",
-  "tab": "Driekwartsmaat. Laat de noten zingen en speel met een cleane sound.\n\n[Couplet]\ne|-----|--------|--0--1--0--|--------|\nB|-----|--1--3--|-----------|--3--0--|\nG|--2--|--------|-----------|--------|\nD|-----|--------|-----------|--------|\nA|-----|--------|-----------|--------|\nE|-----|--------|-----------|--------|\n\ne|-----------|--------|-----------|--------|\nB|--------0--|--1-----|-----------|--0-----|\nG|--0--2-----|-----2--|--2--1--2--|-----1--|\nD|-----------|--------|-----------|--------|\nA|-----------|--------|-----------|--------|\nE|-----------|--------|-----------|--------|\n\ne|--------|--------|--0--1--0--|--------|\nB|--------|--1--3--|-----------|--3--0--|\nG|-----2--|--------|-----------|--------|\nD|--2-----|--------|-----------|--------|\nA|--------|--------|-----------|--------|\nE|--------|--------|-----------|--------|\n\ne|-----------|-----------|-----------|--------|\nB|--------0--|--1--0-----|-----------|--------|\nG|--0--2-----|--------2--|--1-----1--|--2--2--|\nD|-----------|-----------|-----4-----|--------|\nA|-----------|-----------|-----------|--------|\nE|-----------|-----------|-----------|--------|\n\n[Refrein]\ne|--3--|--3--2--0--|--------|-----------|\nB|-----|-----------|--3--0--|--------0--|\nG|-----|-----------|--------|--0--2-----|\nD|-----|-----------|--------|-----------|\nA|-----|-----------|--------|-----------|\nE|-----|-----------|--------|-----------|\n\ne|--------|-----------|--------|-----|\nB|--1-----|-----------|--0-----|-----|\nG|-----2--|--2--1--2--|-----1--|-----|\nD|--------|-----------|--------|--2--|\nA|--------|-----------|--------|-----|\nE|--------|-----------|--------|-----|\n\ne|--3--|--3--2--0--|--------|-----------|\nB|-----|-----------|--3--0--|--------0--|\nG|-----|-----------|--------|--0--2-----|\nD|-----|-----------|--------|-----------|\nA|-----|-----------|--------|-----------|\nE|-----|-----------|--------|-----------|\n\ne|-----------|-----------|-----|\nB|--1--0-----|-----------|-----|\nG|--------2--|--1-----1--|--2--|\nD|-----------|-----4-----|-----|\nA|-----------|-----------|-----|\nE|-----------|-----------|-----|"
- },
- {
-  "id": "pd-ode-g",
-  "instrument": "guitar",
-  "title": "Ode an die Freude",
-  "artist": "Ludwig van Beethoven (1824)",
-  "key": "G",
-  "origin": "pd",
-  "tags": "ode to joy klassiek beginner negende symfonie",
-  "tab": "Alles op de G- en B-snaar, ideaal als eerste melodie.\n\n[A]\ne|--------------|--------------|--------------|-----------|\nB|--0--0--1--3--|--3--1--0-----|-----------0--|--0--------|\nG|--------------|-----------2--|--0--0--2-----|-----2--2--|\nD|--------------|--------------|--------------|-----------|\nA|--------------|--------------|--------------|-----------|\nE|--------------|--------------|--------------|-----------|\n\ne|--------------|--------------|--------------|-----------|\nB|--0--0--1--3--|--3--1--0-----|-----------0--|-----------|\nG|--------------|-----------2--|--0--0--2-----|--2--0--0--|\nD|--------------|--------------|--------------|-----------|\nA|--------------|--------------|--------------|-----------|\nE|--------------|--------------|--------------|-----------|\n\n[B]\ne|--------------|-----------------|-----------------|-----------|\nB|--------0-----|-----0--1--0-----|-----0--1--0-----|-----------|\nG|--2--2-----0--|--2-----------0--|--2-----------2--|--0--2-----|\nD|--------------|-----------------|-----------------|--------0--|\nA|--------------|-----------------|-----------------|-----------|\nE|--------------|-----------------|-----------------|-----------|\n\n[A]\ne|--------------|--------------|--------------|-----------|\nB|--0--0--1--3--|--3--1--0-----|-----------0--|-----------|\nG|--------------|-----------2--|--0--0--2-----|--2--0--0--|\nD|--------------|--------------|--------------|-----------|\nA|--------------|--------------|--------------|-----------|\nE|--------------|--------------|--------------|-----------|"
- },
- {
-  "id": "pd-saints-g",
-  "instrument": "guitar",
-  "title": "When the Saints Go Marching In",
-  "artist": "Traditioneel (Verenigde Staten)",
-  "key": "G",
-  "origin": "pd",
-  "tags": "jazz gospel dixieland beginner",
-  "tab": "Begint met een opmaat van drie noten.\n\ne|-----------|-----|-----------|-----|\nB|-----0--1--|--3--|-----0--1--|--3--|\nG|--0--------|-----|--0--------|-----|\nD|-----------|-----|-----------|-----|\nA|-----------|-----|-----------|-----|\nE|-----------|-----|-----------|-----|\n\ne|--------------|-----------|-----|-----------|\nB|-----0--1--3--|--0-----0--|-----|--0--0-----|\nG|--0-----------|-----0-----|--2--|--------2--|\nD|--------------|-----------|-----|-----------|\nA|--------------|-----------|-----|-----------|\nE|--------------|-----------|-----|-----------|\n\ne|-----------|-----------|-----------|-----------|\nB|--------0--|--3--3--1--|--0--1--3--|--0--------|\nG|--0--0-----|-----------|-----------|-----0--2--|\nD|-----------|-----------|-----------|-----------|\nA|-----------|-----------|-----------|-----------|\nE|-----------|-----------|-----------|-----------|\n\ne|-----|\nB|-----|\nG|--0--|\nD|-----|\nA|-----|\nE|-----|"
- },
- {
-  "id": "ex-shuffle-a",
-  "instrument": "guitar",
-  "title": "Blues shuffle in A",
-  "artist": "Tabkast-oefening",
-  "key": "A",
-  "origin": "ex",
-  "tags": "blues 12 maten powerchord shuffle ritme",
-  "tab": "Twaalf maten blues. Speel met swing (lang-kort) en demp de snaren licht met je handpalm.\n\n   A7\ne|-----------------|-----------------|-----------------|-----------------|\nB|-----------------|-----------------|-----------------|-----------------|\nG|-----------------|-----------------|-----------------|-----------------|\nD|-2-2-4-4-2-2-4-4-|-2-2-4-4-2-2-4-4-|-2-2-4-4-2-2-4-4-|-2-2-4-4-2-2-4-4-|\nA|-0-0-0-0-0-0-0-0-|-0-0-0-0-0-0-0-0-|-0-0-0-0-0-0-0-0-|-0-0-0-0-0-0-0-0-|\nE|-----------------|-----------------|-----------------|-----------------|\n\n   D7                                  A7\ne|-----------------|-----------------|-----------------|-----------------|\nB|-----------------|-----------------|-----------------|-----------------|\nG|-2-2-4-4-2-2-4-4-|-2-2-4-4-2-2-4-4-|-----------------|-----------------|\nD|-0-0-0-0-0-0-0-0-|-0-0-0-0-0-0-0-0-|-2-2-4-4-2-2-4-4-|-2-2-4-4-2-2-4-4-|\nA|-----------------|-----------------|-0-0-0-0-0-0-0-0-|-0-0-0-0-0-0-0-0-|\nE|-----------------|-----------------|-----------------|-----------------|\n\n   E7                D7                A7                E7\ne|-----------------|-----------------|-----------------|-----------------|\nB|-----------------|-----------------|-----------------|-----------------|\nG|-----------------|-2-2-4-4-2-2-4-4-|-----------------|-----------------|\nD|-----------------|-0-0-0-0-0-0-0-0-|-2-2-4-4-2-2-4-4-|-----------------|\nA|-2-2-4-4-2-2-4-4-|-----------------|-0-0-0-0-0-0-0-0-|-2-2-4-4-2-2-4-4-|\nE|-0-0-0-0-0-0-0-0-|-----------------|-----------------|-0-0-0-0-0-0-0-0-|"
- },
- {
-  "id": "ex-penta-am",
-  "instrument": "guitar",
-  "title": "Pentatonische ren in Am",
-  "artist": "Tabkast-oefening",
-  "key": "Am",
-  "origin": "ex",
-  "tags": "toonladder pentatonisch solo opwarmen techniek",
-  "tab": "Box 1 op de vijfde fret, omhoog en weer omlaag. Wissel af met je plectrum (neer-op) en gebruik een metronoom.\n\n[Omhoog]\ne|--------------|--------------|--------5--8--|\nB|--------------|--------------|--5--8--------|\nG|--------------|--------5--7--|--------------|\nD|--------------|--5--7--------|--------------|\nA|--------5--7--|--------------|--------------|\nE|--5--8--------|--------------|--------------|\n\n[Omlaag]\ne|--8--5--------|--------------|--------------|\nB|--------8--5--|--------------|--------------|\nG|--------------|--7--5--------|--------------|\nD|--------------|--------7--5--|--------------|\nA|--------------|--------------|--7--5--------|\nE|--------------|--------------|--------8--5--|"
- },
- {
-  "id": "pd-hall-b",
-  "instrument": "bass",
-  "title": "In de hal van de Bergkoning",
-  "artist": "Edvard Grieg (1875)",
-  "key": "Em",
-  "origin": "pd",
-  "tags": "peer gynt klassiek hall mountain king riff",
-  "tab": "Hetzelfde thema als op gitaar, een octaaf lager. Speel met twee vingers afwisselend.\n\n[Thema]\nG|--------------|-----------|-----------|-----------|\nD|--------------|-----------|-----------|-----------|\nA|-----------0--|--2-----2--|--1-----1--|--0-----0--|\nE|--0--2--3-----|-----3-----|-----2-----|-----1-----|\n\nG|--------------|--------------|--------------|-----|\nD|--------------|-----------2--|--0-----------|--0--|\nA|-----------0--|--2-----2-----|-----2-----2--|-----|\nE|--0--2--3-----|-----3--------|--------3-----|-----|\n\n[Herhaling, sneller]\nG|--------------|-----------|-----------|-----------|\nD|--------------|-----------|-----------|-----------|\nA|-----------0--|--2-----2--|--1-----1--|--0-----0--|\nE|--0--2--3-----|-----3-----|-----2-----|-----1-----|\n\nG|--------------|--------------|--------------|-----|\nD|--------------|-----------2--|--0-----------|--0--|\nA|-----------0--|--2-----2-----|-----2-----2--|-----|\nE|--0--2--3-----|-----3--------|--------3-----|-----|"
- },
- {
-  "id": "pd-saints-b",
-  "instrument": "bass",
-  "title": "When the Saints Go Marching In",
-  "artist": "Traditioneel (Verenigde Staten)",
-  "key": "G",
-  "origin": "pd",
-  "tags": "jazz gospel dixieland beginner",
-  "tab": "De melodie in de lage positie. Begint met een opmaat van drie noten.\n\nG|-----------|-----|-----------|-----|\nD|-----------|--0--|-----------|--0--|\nA|-----2--3--|-----|-----2--3--|-----|\nE|--3--------|-----|--3--------|-----|\n\nG|--------------|-----------|-----|-----------|\nD|-----------0--|-----------|-----|-----------|\nA|-----2--3-----|--2-----2--|--0--|--2--2--0--|\nE|--3-----------|-----3-----|-----|-----------|\n\nG|-----------|-----------|-----------|-----------|\nD|-----------|--0--0-----|--------0--|-----------|\nA|--------2--|--------3--|--2--3-----|--2-----0--|\nE|--3--3-----|-----------|-----------|-----3-----|\n\nG|-----|\nD|-----|\nA|-----|\nE|--3--|"
- },
- {
-  "id": "pd-ode-b",
-  "instrument": "bass",
-  "title": "Ode an die Freude",
-  "artist": "Ludwig van Beethoven (1824)",
-  "key": "G",
-  "origin": "pd",
-  "tags": "ode to joy klassiek beginner",
-  "tab": "De melodie op de D- en G-snaar, rond de vierde positie.\n\n[A]\nG|--4--4--5--7--|--7--5--4-----|-----------4--|--4--------|\nD|--------------|-----------7--|--5--5--7-----|-----7--7--|\nA|--------------|--------------|--------------|-----------|\nE|--------------|--------------|--------------|-----------|\n\nG|--4--4--5--7--|--7--5--4-----|-----------4--|-----------|\nD|--------------|-----------7--|--5--5--7-----|--7--5--5--|\nA|--------------|--------------|--------------|-----------|\nE|--------------|--------------|--------------|-----------|\n\n[B]\nG|--------4-----|-----4--5--4-----|-----4--5--4-----|-----------|\nD|--7--7-----5--|--7-----------5--|--7-----------7--|--5--7--0--|\nA|--------------|-----------------|-----------------|-----------|\nE|--------------|-----------------|-----------------|-----------|\n\n[A]\nG|--4--4--5--7--|--7--5--4-----|-----------4--|-----------|\nD|--------------|-----------7--|--5--5--7-----|--7--5--5--|\nA|--------------|--------------|--------------|-----------|\nE|--------------|--------------|--------------|-----------|"
- },
- {
-  "id": "ex-walk-g",
-  "instrument": "bass",
-  "title": "Walking blues in G",
-  "artist": "Tabkast-oefening",
-  "key": "G",
-  "origin": "ex",
-  "tags": "blues walking bass 12 maten jazz kwartnoten",
-  "tab": "Vier kwartnoten per maat: grondtoon op tel 1, en op tel 4 een halve toon naast het volgende akkoord.\n\n    G7\nG|--------------|--------------|--------------|--------------|\nD|-----------2--|--3--2--------|-----------2--|--3--2--------|\nA|-----2--5-----|--------5--2--|-----2--5-----|--------5--4--|\nE|--3-----------|--------------|--3-----------|--------------|\n\n    C7                            G7\nG|-----------2--|--3--2--------|--------------|--------------|\nD|-----2--5-----|--------5--2--|-----------2--|--------------|\nA|--3-----------|--------------|-----2--5-----|-----2--5--4--|\nE|--------------|--------------|--3-----------|--3-----------|\n\n    D7             C7             G7             D7\nG|--------2--4--|-----------2--|--------------|--------------|\nD|--0--4--------|-----2--5-----|-----------2--|--0-----------|\nA|--------------|--3-----------|-----2--5-----|-----3--2--0--|\nE|--------------|--------------|--3-----------|--------------|"
- },
- {
-  "id": "ex-octave-e",
-  "instrument": "bass",
-  "title": "Octaafgroove in E",
-  "artist": "Tabkast-oefening",
-  "key": "E",
-  "origin": "ex",
-  "tags": "disco funk octaven groove achtsten",
-  "tab": "Achtste noten, wissel steeds tussen grondtoon en octaaf. Demp de open snaar met je vingertoppen als je naar het octaaf springt.\n\n   E                                   A                 B\nG|-----------------|-----------------|---2---2---2---2-|---4---4---4---4-|\nD|---2---2---2---2-|---2---2---2---2-|-----------------|-----------------|\nA|-----------------|-----------------|-0---0---0---0---|-2---2---2---2---|\nE|-0---0---0---0---|-0---0---0---0---|-----------------|-----------------|\n\nHerhaal vier keer."
- }
-];
-</script>
-<script>
 (() => {
   'use strict';
   const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const MINUS = '\u2212';
+  const icon = (id, fill) => `<svg class="i${fill ? ' fill' : ''}" aria-hidden="true"><use href="#i-${id}"/></svg>`;
 
   const store = {
     get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
@@ -943,7 +873,8 @@ const BUILTIN_SONGS = [
     defaults: 'tabkast.defaults.v1',
     legacy: 'tabkast.transpose.v1',
     prefs: 'tabkast.prefs.v1',
-    sel: 'tabkast.selected'
+    sel: 'tabkast.selected',
+    bm: 'tabkast.bookmarkUsed'
   };
 
   function loadUser() {
@@ -953,7 +884,6 @@ const BUILTIN_SONGS = [
   function loadDefaults() {
     let d = store.get(KEYS.defaults, null);
     if (!d || typeof d !== 'object') {
-      // Eerdere versie onthield de laatste transpositie automatisch: neem die over als standaard
       const legacy = store.get(KEYS.legacy, null);
       d = legacy && typeof legacy === 'object' ? legacy : {};
       store.set(KEYS.defaults, d);
@@ -976,32 +906,41 @@ const BUILTIN_SONGS = [
   };
 
   const INST_NAME = { guitar: 'Elektrische gitaar', bass: 'Basgitaar' };
-  const ORIGIN_NAME = { user: 'Eigen tab', pd: 'Publiek domein', ex: 'Oefening' };
   const app = $('#app'), list = $('#list'), viewer = $('#viewer'), q = $('#q');
 
   const newId = () => 'u-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
   const isHttp = (u) => /^https?:\/\//i.test(String(u || ''));
   const hostOf = (u) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return ''; } };
-
-  function allSongs() {
-    const mine = state.user.map((s) => Object.assign({}, s, { origin: 'user' }))
-      .sort((a, b) => (b.created || 0) - (a.created || 0));
-    return mine.concat(BUILTIN_SONGS);
-  }
-  const getSong = (id) => allSongs().find((s) => s.id === id) || null;
   const norm = (s) => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const fmtSemis = (n) => (n > 0 ? '+' + n : n < 0 ? MINUS + Math.abs(n) : '0');
+  const tones = (n) => `${Math.abs(n)} ${Math.abs(n) === 1 ? 'halve toon' : 'halve tonen'}`;
+
+  const songs = () => state.user.slice().sort((a, b) => (b.created || 0) - (a.created || 0));
+  const getSong = (id) => state.user.find((s) => s.id === id) || null;
   const defaultOf = (id) => (Number.isInteger(state.defaults[id]) ? state.defaults[id] : 0);
   const semisOf = (id) => (Object.prototype.hasOwnProperty.call(state.current, id) ? state.current[id] : defaultOf(id));
-  const fmtSemis = (n) => (n > 0 ? '+' + n : n < 0 ? MINUS + Math.abs(n) : '0');
 
   function filtered() {
     const words = norm(state.q).split(/\s+/).filter(Boolean);
-    return allSongs().filter((s) => {
+    return songs().filter((s) => {
       if (s.instrument !== state.instrument) return false;
       if (!words.length) return true;
-      const hay = norm([s.title, s.artist, s.key, s.tags].join(' '));
+      const hay = norm([s.title, s.artist, s.key].join(' '));
       return words.every((w) => hay.includes(w));
     });
+  }
+
+  /* ---------- Lege staat ---------- */
+  function heroHTML() {
+    return `<div class="hero">
+      <h1>Voeg je eerste tab toe</h1>
+      <p>Plak een link naar een tab. Daarna kun je hem transponeren en je favoriete toonsoort bewaren.</p>
+      <div class="urlrow">
+        <input class="heroUrl" type="url" inputmode="url" placeholder="Plak een link naar een tab" aria-label="Link naar een tab" autocomplete="off" spellcheck="false">
+        <button type="button" class="btn primary" data-act="herofetch">Ophalen</button>
+      </div>
+      <p class="hint small"><button type="button" class="linkbtn" data-act="paste">Of plak de tab zelf</button></p>
+    </div>`;
   }
 
   /* ---------- Lijst ---------- */
@@ -1019,107 +958,58 @@ const BUILTIN_SONGS = [
   }
 
   function renderList() {
+    const total = state.user.length;
+    $('#searchBox').hidden = total === 0;
+    if (!total) { list.innerHTML = `<p class="listmsg only-desk">Nog geen tabs.</p>${heroHTML()}`; return; }
     const res = filtered();
-    const mine = res.filter((s) => s.origin === 'user');
-    const rest = res.filter((s) => s.origin !== 'user');
-    let html = '';
-    if (mine.length) html += `<h2 class="grp">Jouw tabs</h2>` + mine.map(itemHTML).join('');
-    if (rest.length) html += `<h2 class="grp">Voorbeelden en oefeningen</h2>` + rest.map(itemHTML).join('');
-    if (!res.length) {
-      html = `<div class="none"><p><strong>Geen ${state.instrument === 'bass' ? 'bastab' : 'gitaartab'} gevonden voor “${esc(state.q.trim())}”.</strong></p>
-        <p>Zoek hem hieronder online en voeg hem toe met een link of door te kopiëren en plakken.</p></div>`;
-    }
-    list.innerHTML = html;
-    $('#online').classList.toggle('focus', !res.length);
-    updateLinks();
-  }
-
-  function updateLinks() {
-    const term = state.q.trim();
-    const e = encodeURIComponent(term);
-    const suffix = state.instrument === 'bass' ? ' bass tab' : ' guitar tab';
-    $('#lnkUG').href = term ? `https://www.ultimate-guitar.com/search.php?search_type=title&value=${e}` : 'https://www.ultimate-guitar.com/';
-    $('#lnkSS').href = term ? `https://www.songsterr.com/?pattern=${e}` : 'https://www.songsterr.com/';
-    $('#lnkGG').href = `https://www.google.com/search?q=${encodeURIComponent(term + suffix)}`;
-    const label = term ? `“${term}”` : 'een nummer';
-    $('#lnkUG').setAttribute('aria-label', `Zoek ${label} op Ultimate Guitar (opent in nieuw tabblad)`);
-    $('#lnkSS').setAttribute('aria-label', `Zoek ${label} op Songsterr (opent in nieuw tabblad)`);
-    $('#lnkGG').setAttribute('aria-label', `Zoek ${label} met Google (opent in nieuw tabblad)`);
+    if (res.length) { list.innerHTML = res.map(itemHTML).join(''); return; }
+    list.innerHTML = state.q.trim()
+      ? `<p class="listmsg">Geen tabs gevonden voor “${esc(state.q.trim())}”.</p>`
+      : `<p class="listmsg">Nog geen ${state.instrument === 'bass' ? 'bastabs' : 'gitaartabs'}. Voeg er een toe met <strong>Tab toevoegen</strong>.</p>`;
   }
 
   function renderInstrument() {
-    document.querySelectorAll('#instSeg button').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.inst === state.instrument)));
+    $$('#instSeg button').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.inst === state.instrument)));
   }
 
   /* ---------- Viewer ---------- */
-  function renderWelcome() {
+  function renderEmptyViewer() {
     stopScroll();
-    viewer.innerHTML = `<div class="welcome">
-      <h1>Zoek een nummer, kies je instrument en oefen het in elke toonsoort.</h1>
-      <ol>
-        <li><strong>Zoek</strong> in je kast op titel of artiest.</li>
-        <li><strong>Kies</strong> een nummer en de tab verschijnt hier.</li>
-        <li><strong>Transponeer</strong> met ${MINUS} en + per halve toon en bewaar je favoriete toonsoort als standaard.</li>
-      </ol>
-      <p>Staat je nummer er niet in? <button type="button" class="linkbtn" data-act="add">Voeg een tab toe</button> met een link of door hem te plakken.</p>
-    </div>`;
+    closePops();
+    viewer.innerHTML = state.user.length ? `<div class="idle"><p>Kies een tab uit de lijst.</p></div>` : heroHTML();
   }
 
   function renderViewer() {
     const s = getSong(state.selected);
-    if (!s || s.instrument !== state.instrument) { renderWelcome(); return; }
+    if (!s || s.instrument !== state.instrument) { renderEmptyViewer(); return; }
     stopScroll();
-    const isUser = s.origin === 'user';
+    closePops();
     viewer.innerHTML = `
       <div class="vhead">
-        <button type="button" class="btn back" data-act="back">Terug naar de lijst</button>
-        <h1 class="vtitle">${esc(s.title)}</h1>
-        <p class="vartist">${esc(s.artist || 'Onbekende artiest')}</p>
-        <ul class="chips" id="chips"></ul>
-        <div class="vactions">
-          <button type="button" class="btn" data-act="copy">Kopieer tab</button>
-          <span id="bakeWrap" style="display:contents"></span>
-          ${isHttp(s.source) ? `<a class="btn" href="${esc(s.source)}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">Bron openen</a>` : ''}
-          ${isUser ? `<button type="button" class="btn" data-act="edit">Bewerken</button>
-          <button type="button" class="btn danger" data-act="delete">Verwijderen</button>` : ''}
+        <div class="vtop">
+          <button type="button" class="icon-btn back" data-act="back" aria-label="Terug naar de lijst">${icon('back')}</button>
+          <div class="vtitles">
+            <h1 class="vtitle">${esc(s.title)}</h1>
+            <p class="vartist">${esc(s.artist || 'Onbekende artiest')}</p>
+          </div>
+          <button type="button" class="icon-btn" data-act="menu" aria-haspopup="menu" aria-expanded="false" aria-label="Meer acties" title="Meer acties">${icon('more', true)}</button>
         </div>
+        <p class="vinfo" id="vinfo"></p>
       </div>
-      <div class="pedalbar">
-        <div class="pedal" role="group" aria-label="Transponeren">
-          <button type="button" class="foot" data-act="down" aria-label="Halve toon lager">${MINUS}</button>
-          <div class="screen"><output id="semiOut" aria-live="polite">0</output><span>halve tonen</span></div>
-          <button type="button" class="foot" data-act="up" aria-label="Halve toon hoger">+</button>
+      <div class="toolbar">
+        <div class="stepper" role="group" aria-label="Transponeren">
+          <button type="button" data-act="down" aria-label="Halve toon lager" title="Halve toon lager (−)">${icon('minus')}</button>
+          <div class="stepval" aria-live="polite"><span class="kv" id="kv"></span><span class="ov" id="ov"></span></div>
+          <button type="button" data-act="up" aria-label="Halve toon hoger" title="Halve toon hoger (+)">${icon('plus')}</button>
         </div>
-        <div class="keyline"><span class="now" id="keyNow"></span><span class="orig" id="keyOrig"></span></div>
-        <div class="savectl" id="saveCtl"></div>
-        <div class="scrollctl">
-          <button type="button" class="btn scrollbtn" data-act="scroll" aria-pressed="false" aria-label="Automatisch scrollen">
-            <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5v11l9-5.5z" fill="currentColor"/></svg>
-            <span class="lbl">Autoscroll</span></button>
-          <input type="range" min="1" max="10" step="1" id="speedA" aria-label="Scrollsnelheid" value="${state.prefs.speed}">
+        <div class="tstatus" id="tStatus"></div>
+        <div class="tright">
+          <button type="button" class="icon-btn" data-act="scroll" aria-pressed="false" aria-label="Automatisch scrollen" title="Autoscroll (S)">${icon('play', true)}</button>
+          <button type="button" class="icon-btn" data-act="settings" aria-haspopup="dialog" aria-expanded="false" aria-label="Weergave-instellingen" title="Weergave">${icon('sliders')}</button>
         </div>
-      </div>
-      <div class="tools">
-        <label>Transponeren
-          <select id="modeSel">
-            <option value="smart">Slim: zo nodig naar een andere snaar</option>
-            <option value="simple">Alleen fretnummers aanpassen</option>
-          </select>
-        </label>
-        <div class="seg small" role="radiogroup" aria-label="Weergave" id="viewSeg">
-          <button type="button" role="radio" data-view="strings">Snaren</button>
-          <button type="button" role="radio" data-view="text">Tekst</button>
-        </div>
-        <div class="sizer" role="group" aria-label="Tekstgrootte">
-          <button type="button" class="btn" data-act="smaller" aria-label="Kleinere tab">A${MINUS}</button>
-          <button type="button" class="btn" data-act="bigger" aria-label="Grotere tab">A+</button>
-        </div>
-        <label class="speedfield">Scrollsnelheid <input type="range" min="1" max="10" step="1" id="speedB" value="${state.prefs.speed}"></label>
-        <span class="keys">Sneltoetsen: <kbd>${MINUS}</kbd> <kbd>+</kbd> transponeren, <kbd>0</kbd> origineel, <kbd>S</kbd> autoscroll</span>
       </div>
       <div class="tip" id="tip"></div>
       <div class="sheet" id="sheet"></div>`;
-    $('#modeSel').value = state.prefs.mode;
     viewer.scrollTop = 0;
     updateSheet();
   }
@@ -1158,17 +1048,11 @@ const BUILTIN_SONGS = [
   function sheetHTML(rows, inst) {
     let html = '';
     for (const r of rows) {
-      if (r.type === 'block') {
-        html += `<div class="block">${r.lines.map((l) => lineHTML(l, r.lines.length, inst)).join('')}</div>`;
-      } else if (r.type === 'chord') {
-        html += `<div class="row chord">${esc(r.text)}</div>`;
-      } else if (/^\s*\[[^\]]+\]\s*$/.test(r.text)) {
-        html += `<div class="row sec">${esc(r.text.trim().slice(1, -1))}</div>`;
-      } else if (/^[A-Za-zÀ-ÿ].{50,}$/.test(r.text) && !/\|.*-{3}/.test(r.text)) {
-        html += `<div class="row note">${esc(r.text)}</div>`;
-      } else {
-        html += `<div class="row txt">${esc(r.text) || ' '}</div>`;
-      }
+      if (r.type === 'block') html += `<div class="block">${r.lines.map((l) => lineHTML(l, r.lines.length, inst)).join('')}</div>`;
+      else if (r.type === 'chord') html += `<div class="row chord">${esc(r.text)}</div>`;
+      else if (/^\s*\[[^\]]+\]\s*$/.test(r.text)) html += `<div class="row sec">${esc(r.text.trim().slice(1, -1))}</div>`;
+      else if (/^[A-Za-zÀ-ÿ].{50,}$/.test(r.text) && !/\|.*-{3}/.test(r.text)) html += `<div class="row note">${esc(r.text)}</div>`;
+      else html += `<div class="row txt">${esc(r.text) || ' '}</div>`;
     }
     return html;
   }
@@ -1182,57 +1066,152 @@ const BUILTIN_SONGS = [
     const r = TabEngine.transpose(s.tab, n, { mode: state.prefs.mode, instrument: s.instrument, maxFret: 22 });
     lastResult = r;
 
-    $('#semiOut').textContent = fmtSemis(n);
+    // Transponeerknop: resulterende toonsoort groot, verschuiving klein
+    const newKey = s.key ? TabEngine.transposeKey(s.key, n) : '';
+    $('#kv').textContent = newKey || fmtSemis(n);
+    const ov = $('#ov');
+    ov.textContent = newKey ? (n ? `${fmtSemis(n)} ${n === 1 || n === -1 ? 'halve toon' : 'halve tonen'}` : 'origineel') : (n ? 'halve tonen' : 'origineel');
+    ov.classList.toggle('on', n !== 0);
     viewer.querySelector('[data-act="down"]').disabled = n <= -12;
     viewer.querySelector('[data-act="up"]').disabled = n >= 12;
 
-    const newKey = s.key ? TabEngine.transposeKey(s.key, n) : '';
-    $('#keyNow').innerHTML = newKey ? `<span class="kw">Toonsoort </span>${esc(newKey)}` : (n ? 'Getransponeerd' : 'Origineel');
+    // Status: opslaan als standaard of terug
+    const st = [];
+    if (n !== def) st.push(`<button type="button" class="btn sm" data-act="savedef">Bewaar als standaard</button>`);
+    else if (def !== 0) st.push(`<span class="std">${icon('check')}Jouw standaard</span>`);
+    if (n !== 0) st.push(`<button type="button" class="linkbtn" data-act="reset">Origineel${s.key ? ' ' + esc(s.key) : ''}</button>`);
+    if (def !== 0 && n !== def) st.push(`<button type="button" class="linkbtn" data-act="todef">Standaard ${fmtSemis(def)}</button>`);
+    if (!st.length) st.push(`<span class="plain">${s.key ? 'Originele toonsoort' : 'Originele toonhoogte'}</span>`);
+    $('#tStatus').innerHTML = st.join('');
 
-    const parts = [];
-    if (n === def && def !== 0) parts.push('<span class="std">jouw standaard</span>');
-    if (n !== 0) parts.push(`<button type="button" class="linkbtn" data-act="reset">Origineel${s.key ? ' ' + esc(s.key) : ''}</button>`);
-    if (def !== 0 && n !== def) parts.push(`<button type="button" class="linkbtn" data-act="todef">Standaard ${fmtSemis(def)}</button>`);
-    if (!parts.length) parts.push(s.key ? 'originele toonsoort' : 'originele toonhoogte');
-    $('#keyOrig').innerHTML = parts.join('');
-
-    $('#saveCtl').innerHTML = n !== def
-      ? `<button type="button" class="btn save" data-act="savedef">${n === 0 ? 'Origineel als standaard bewaren' : `${fmtSemis(n)} als standaard bewaren`}</button>`
-      : '';
-
-    $('#bakeWrap').innerHTML = n !== 0
-      ? `<button type="button" class="btn" data-act="bake">Kopie opslaan in ${newKey ? esc(newKey) : fmtSemis(n)}</button>`
-      : '';
-
+    // Info-regel
     const tuning = r.tuning || TabEngine.STANDARD[s.instrument];
-    $('#chips').innerHTML = [INST_NAME[s.instrument], `Stemming ${tuning.join(' ')}`, ORIGIN_NAME[s.origin] || '', isHttp(s.source) ? `Van ${hostOf(s.source)}` : '']
-      .filter(Boolean).map((c) => `<li>${esc(c)}</li>`).join('');
+    const src = isHttp(s.source) ? `, van <a href="${esc(s.source)}" target="_blank" rel="noopener">${esc(hostOf(s.source))}</a>` : '';
+    $('#vinfo').innerHTML = `${esc(INST_NAME[s.instrument])}, stemming ${esc(tuning.join(' '))}${src}`;
 
+    // Tips
     const tips = [];
     const instWord = s.instrument === 'bass' ? 'je bas' : 'je gitaar';
-    if (!r.blocks) tips.push('<p>Er zijn geen tabregels herkend in deze tab. Akkoordnamen worden wel getransponeerd.</p>');
-    if (n < 0 && n >= -5 && r.blocks) {
-      tips.push(`<p>Liever dezelfde vingerzetting? Stem ${instWord} ${Math.abs(n) === 1 ? 'een halve toon' : Math.abs(n) + ' halve tonen'} lager naar ${esc(TabEngine.shiftTuning(tuning, n).join(' '))} en speel de originele tab.</p>`);
-    }
-    if (n > 0 && n <= 7 && s.instrument === 'guitar' && r.blocks) {
-      tips.push(`<p>Met een capo op de ${n}e fret kun je ook de originele tab spelen.</p>`);
-    }
-    if (r.moved) tips.push(`<p><span class="lg moved">${r.moved} ${r.moved === 1 ? 'noot' : 'noten'}</span> ${r.moved === 1 ? 'staat' : 'staan'} nu op een andere snaar, omdat ${r.moved === 1 ? 'hij' : 'ze'} anders buiten de hals ${r.moved === 1 ? 'viel' : 'vielen'}.</p>`);
-    if (r.octave) tips.push(`<p><span class="lg octave">${r.octave} ${r.octave === 1 ? 'noot' : 'noten'}</span> ${r.octave === 1 ? 'is' : 'zijn'} een octaaf verschoven, omdat er geen andere snaar vrij was.</p>`);
+    if (!r.blocks) tips.push('<p>Geen tabregels herkend. Akkoordnamen worden wel getransponeerd.</p>');
+    if (n < 0 && n >= -5 && r.blocks) tips.push(`<p>Zelfde vingerzetting houden? Stem ${instWord} ${tones(n)} lager naar ${esc(TabEngine.shiftTuning(tuning, n).join(' '))} en speel het origineel.</p>`);
+    if (n > 0 && n <= 7 && s.instrument === 'guitar' && r.blocks) tips.push(`<p>Of speel het origineel met een capo op de ${n}e fret.</p>`);
+    const stat = [];
+    if (r.moved) stat.push(`<span class="lg moved">${r.moved} ${r.moved === 1 ? 'noot' : 'noten'}</span> naar een andere snaar verplaatst`);
+    if (r.octave) stat.push(`<span class="lg octave">${r.octave} ${r.octave === 1 ? 'noot' : 'noten'}</span> een octaaf verschoven`);
+    if (stat.length) tips.push(`<p>${stat.join(', ')}.</p>`);
     $('#tip').innerHTML = tips.join('');
 
     const sheet = $('#sheet');
     sheet.className = 'sheet' + (state.prefs.view === 'strings' ? ' strings' : '');
     sheet.style.setProperty('--fs', state.prefs.fs + 'px');
     sheet.innerHTML = sheetHTML(r.rows, s.instrument);
-    document.querySelectorAll('#viewSeg button').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.view === state.prefs.view)));
+    syncSettings();
   }
+
+  /* ---------- Popovers ---------- */
+  let openPop = null;
+  function showPop(pop, anchor) {
+    closePops();
+    pop.hidden = false;
+    anchor.setAttribute('aria-expanded', 'true');
+    openPop = { pop, anchor };
+    placePop();
+    const first = pop.querySelector('button:not([disabled]), input:checked, input');
+    if (first) first.focus({ preventScroll: true });
+  }
+  function placePop() {
+    if (!openPop) return;
+    const { pop, anchor } = openPop;
+    const r = anchor.getBoundingClientRect();
+    const pw = pop.offsetWidth, ph = pop.offsetHeight;
+    const left = Math.min(window.innerWidth - pw - 8, Math.max(8, r.right - pw));
+    let top = r.bottom + 6;
+    if (top + ph > window.innerHeight - 8) top = Math.max(8, r.top - ph - 6);
+    pop.style.left = left + 'px';
+    pop.style.top = top + 'px';
+  }
+  function closePops(focusAnchor) {
+    if (!openPop) return;
+    openPop.pop.hidden = true;
+    openPop.anchor.setAttribute('aria-expanded', 'false');
+    if (focusAnchor) openPop.anchor.focus();
+    openPop = null;
+  }
+  document.addEventListener('pointerdown', (e) => {
+    if (openPop && !openPop.pop.contains(e.target) && !openPop.anchor.contains(e.target)) closePops();
+  });
+  window.addEventListener('resize', placePop);
+  viewer.addEventListener('scroll', () => { if (openPop && openPop.pop.id === 'menuPop') closePops(); }, { passive: true });
+
+  function renderMenu() {
+    const s = getSong(state.selected);
+    if (!s) return;
+    const n = semisOf(s.id);
+    const newKey = s.key ? TabEngine.transposeKey(s.key, n) : '';
+    $('#menuPop').innerHTML = `
+      <button type="button" role="menuitem" data-menu="copy">${icon('copy')}Tab kopiëren</button>
+      ${n ? `<button type="button" role="menuitem" data-menu="bake">${icon('dup')}Kopie opslaan in ${newKey ? esc(newKey) : fmtSemis(n)}</button>` : ''}
+      ${isHttp(s.source) ? `<button type="button" role="menuitem" data-menu="source">${icon('ext')}Bron openen</button>` : ''}
+      <button type="button" role="menuitem" data-menu="edit">${icon('edit')}Bewerken</button>
+      <hr>
+      <button type="button" role="menuitem" class="danger" data-menu="delete">${icon('trash')}<span>Verwijderen</span></button>`;
+  }
+
+  $('#menuPop').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-menu]');
+    if (!b) return;
+    const s = getSong(state.selected);
+    if (!s) return;
+    switch (b.dataset.menu) {
+      case 'copy': closePops(); copyTab(); break;
+      case 'bake': closePops(); bakeCopy(); break;
+      case 'source': closePops(); window.open(s.source, '_blank', 'noopener'); break;
+      case 'edit': closePops(); openEditor(s); break;
+      case 'delete':
+        if (b.dataset.armed === 'true') { closePops(); deleteTab(); }
+        else { b.dataset.armed = 'true'; b.querySelector('span').textContent = 'Klik nogmaals om te verwijderen'; }
+        break;
+    }
+  });
+  $('#menuPop').addEventListener('keydown', (e) => {
+    const items = $$('#menuPop [role="menuitem"]');
+    const i = items.indexOf(document.activeElement);
+    if (e.key === 'ArrowDown') { e.preventDefault(); items[(i + 1) % items.length].focus(); }
+    if (e.key === 'ArrowUp') { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
+  });
+
+  function syncSettings() {
+    $$('#setPop input[name="mode"]').forEach((r) => { r.checked = r.value === state.prefs.mode; });
+    $$('#viewSeg button').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.view === state.prefs.view)));
+    $('#fsOut').textContent = state.prefs.fs + ' px';
+    $('#speed').value = state.prefs.speed;
+  }
+  const savePrefs = () => store.set(KEYS.prefs, state.prefs);
+  $('#setPop').addEventListener('change', (e) => {
+    if (e.target.name === 'mode') { state.prefs.mode = e.target.value; savePrefs(); updateSheet(); }
+  });
+  $('#setPop').addEventListener('input', (e) => {
+    if (e.target.id === 'speed') { state.prefs.speed = +e.target.value; savePrefs(); }
+  });
+  $('#setPop').addEventListener('click', (e) => {
+    const v = e.target.closest('[data-view]');
+    if (v) { state.prefs.view = v.dataset.view; savePrefs(); updateSheet(); return; }
+    const z = e.target.closest('[data-set]');
+    if (z) {
+      state.prefs.fs = Math.max(10, Math.min(28, state.prefs.fs + (z.dataset.set === 'bigger' ? 1 : -1)));
+      savePrefs(); updateSheet();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && openPop) { closePops(true); e.stopPropagation(); }
+  }, true);
 
   /* ---------- Acties ---------- */
   function select(id) {
     state.selected = id;
     store.set(KEYS.sel, id);
-    list.querySelectorAll('.item').forEach((el) => el.setAttribute('aria-current', String(el.dataset.id === id)));
+    $$('.item', list).forEach((el) => el.setAttribute('aria-current', String(el.dataset.id === id)));
     renderViewer();
     if (mq.matches) openViewer();
   }
@@ -1247,6 +1226,7 @@ const BUILTIN_SONGS = [
     if (!app.classList.contains('viewing')) return;
     app.classList.remove('viewing');
     stopScroll();
+    closePops();
     if (!fromPop && state.pushed) { state.pushed = false; try { history.back(); } catch (e) {} }
     const item = list.querySelector('.item[aria-current="true"]');
     if (item) item.focus({ preventScroll: false });
@@ -1280,22 +1260,24 @@ const BUILTIN_SONGS = [
     if (!n) return;
     const newKey = s.key ? TabEngine.transposeKey(s.key, n) : '';
     const rec = {
-      id: newId(),
-      title: `${s.title} (${newKey ? 'in ' + newKey : fmtSemis(n)})`,
+      id: newId(), title: `${s.title} (${newKey ? 'in ' + newKey : fmtSemis(n)})`,
       artist: s.artist || '', key: newKey, instrument: s.instrument,
       tab: TabEngine.rowsToText(lastResult.rows), source: s.source || '', created: Date.now()
     };
-    state.user.unshift(rec);
+    state.user.push(rec);
     const ok = store.set(KEYS.user, state.user);
     renderList();
     select(rec.id);
-    toast(ok ? 'Kopie opgeslagen in je kast' : 'Opslaan in deze browser lukte niet.');
+    toast(ok ? 'Kopie opgeslagen' : 'Opslaan in deze browser lukte niet.');
   }
 
-  const savePrefs = () => store.set(KEYS.prefs, state.prefs);
-
-  // Autoscroll
   let rafId = 0, lastT = 0, acc = 0;
+  function setScrollIcon(on) {
+    const b = viewer.querySelector('[data-act="scroll"]');
+    if (!b) return;
+    b.setAttribute('aria-pressed', String(on));
+    b.innerHTML = icon(on ? 'pause' : 'play', true);
+  }
   function tick(t) {
     if (!state.scrolling) return;
     const dt = lastT ? Math.min(0.1, (t - lastT) / 1000) : 0;
@@ -1309,15 +1291,13 @@ const BUILTIN_SONGS = [
   function startScroll() {
     if (!$('#sheet')) return;
     state.scrolling = true; lastT = 0; acc = 0;
-    const b = viewer.querySelector('[data-act="scroll"]');
-    if (b) b.setAttribute('aria-pressed', 'true');
+    setScrollIcon(true);
     rafId = requestAnimationFrame(tick);
   }
   function stopScroll() {
     state.scrolling = false;
     cancelAnimationFrame(rafId);
-    const b = viewer.querySelector('[data-act="scroll"]');
-    if (b) b.setAttribute('aria-pressed', 'false');
+    setScrollIcon(false);
   }
 
   let toastT = 0;
@@ -1326,7 +1306,7 @@ const BUILTIN_SONGS = [
     el.textContent = msg;
     el.classList.add('show');
     clearTimeout(toastT);
-    toastT = setTimeout(() => el.classList.remove('show'), 2200);
+    toastT = setTimeout(() => el.classList.remove('show'), 2400);
   }
 
   async function copyText(text) {
@@ -1340,7 +1320,6 @@ const BUILTIN_SONGS = [
       return ok;
     }
   }
-
   async function copyTab() {
     const s = getSong(state.selected);
     if (!s || !lastResult) return;
@@ -1350,15 +1329,7 @@ const BUILTIN_SONGS = [
     toast(ok ? 'Tab gekopieerd' : 'Kopiëren lukte niet. Selecteer de tab en kopieer hem handmatig.');
   }
 
-  let armT = 0;
-  function deleteTab(btn) {
-    if (btn.dataset.armed !== 'true') {
-      btn.dataset.armed = 'true';
-      btn.textContent = 'Klik nogmaals om te verwijderen';
-      clearTimeout(armT);
-      armT = setTimeout(() => { btn.dataset.armed = 'false'; btn.textContent = 'Verwijderen'; }, 3500);
-      return;
-    }
+  function deleteTab() {
     const id = state.selected;
     state.user = state.user.filter((s) => s.id !== id);
     delete state.defaults[id];
@@ -1369,17 +1340,14 @@ const BUILTIN_SONGS = [
     store.set(KEYS.sel, null);
     closeViewer();
     renderList();
-    renderWelcome();
+    renderEmptyViewer();
     toast('Tab verwijderd');
   }
 
   /* ---------- Invoer ---------- */
   q.addEventListener('input', () => { state.q = q.value; renderList(); });
   q.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      const first = list.querySelector('.item');
-      if (first) select(first.dataset.id);
-    }
+    if (e.key === 'Enter') { const first = list.querySelector('.item'); if (first) select(first.dataset.id); }
   });
 
   $('#instSeg').addEventListener('click', (e) => {
@@ -1399,10 +1367,10 @@ const BUILTIN_SONGS = [
     if (b) select(b.dataset.id);
   });
 
-  viewer.addEventListener('click', (e) => {
-    const b = e.target.closest('[data-act], [data-view]');
-    if (!b) return;
-    if (b.dataset.view) { state.prefs.view = b.dataset.view; savePrefs(); updateSheet(); return; }
+  // Acties in de lijst, de viewer en de lege staat
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-act]');
+    if (!b || !(viewer.contains(b) || list.contains(b))) return;
     const s = getSong(state.selected);
     const n = s ? semisOf(s.id) : 0;
     switch (b.dataset.act) {
@@ -1411,43 +1379,41 @@ const BUILTIN_SONGS = [
       case 'reset': setSemis(0); break;
       case 'todef': if (s) setSemis(defaultOf(s.id)); break;
       case 'savedef': saveDefault(); break;
-      case 'bake': bakeCopy(); break;
       case 'back': closeViewer(); break;
       case 'scroll': state.scrolling ? stopScroll() : startScroll(); break;
-      case 'smaller': state.prefs.fs = Math.max(10, state.prefs.fs - 1); savePrefs(); updateSheet(); break;
-      case 'bigger': state.prefs.fs = Math.min(28, state.prefs.fs + 1); savePrefs(); updateSheet(); break;
-      case 'copy': copyTab(); break;
-      case 'edit': openEditor(s); break;
-      case 'delete': deleteTab(b); break;
-      case 'add': openEditor(null); break;
+      case 'menu': if (openPop && openPop.pop.id === 'menuPop') closePops(); else { renderMenu(); showPop($('#menuPop'), b); } break;
+      case 'settings': if (openPop && openPop.pop.id === 'setPop') closePops(); else { syncSettings(); showPop($('#setPop'), b); } break;
+      case 'paste': openEditor(null, null, 'paste'); break;
+      case 'herofetch': {
+        const input = b.closest('.hero').querySelector('.heroUrl');
+        openEditor(null, null, 'link', input.value.trim());
+        if (input.value.trim()) fetchUrl();
+        break;
+      }
     }
   });
-  viewer.addEventListener('change', (e) => {
-    if (e.target.id === 'modeSel') { state.prefs.mode = e.target.value; savePrefs(); updateSheet(); }
-  });
-  viewer.addEventListener('input', (e) => {
-    if (e.target.id === 'speedA' || e.target.id === 'speedB') {
-      state.prefs.speed = +e.target.value; savePrefs();
-      const other = $(e.target.id === 'speedA' ? '#speedB' : '#speedA');
-      if (other) other.value = e.target.value;
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && e.target.classList && e.target.classList.contains('heroUrl')) {
+      e.preventDefault();
+      e.target.closest('.hero').querySelector('[data-act="herofetch"]').click();
     }
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.target.closest('input, textarea, select, dialog') || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.target.closest('input, textarea, select, dialog, .pop') || e.metaKey || e.ctrlKey || e.altKey) return;
     if (e.key === 'Escape' && app.classList.contains('viewing')) { closeViewer(); return; }
     if (!getSong(state.selected) || !$('#sheet')) return;
     const n = semisOf(state.selected);
     if (e.key === '-' || e.key === '_') { e.preventDefault(); setSemis(n - 1); }
     else if (e.key === '+' || e.key === '=') { e.preventDefault(); setSemis(n + 1); }
-    else if (e.key === '0') { setSemis(0); }
+    else if (e.key === '0') setSemis(0);
     else if (e.key === 's' || e.key === 'S') { state.scrolling ? stopScroll() : startScroll(); }
   });
 
-  /* ---------- Importeren van een pagina ---------- */
-  // Deze functie draait als bladwijzer op de tabsite zelf; hij mag niets van buitenaf gebruiken.
-  function tabkastGrab(APP) {
-    var d = { v: 1, u: location.href, h: location.hostname, pt: document.title };
+  /* ---------- Importeren ---------- */
+  // Draait als bladwijzer op de tabsite zelf; mag niets van buitenaf gebruiken.
+  function tabkastGrab(APP, ORIGIN) {
+    var d = { v: 2, u: location.href.replace(/#tabkast$/, ''), h: location.hostname, pt: document.title };
     var sel = String(window.getSelection ? window.getSelection() : '');
     if (sel.replace(/\s/g, '').length > 20) { d.c = sel; d.m = 'sel'; }
     if (!d.c) {
@@ -1473,6 +1439,17 @@ const BUILTIN_SONGS = [
     if (!d.c) { d.c = document.body.innerText || document.body.textContent || ''; d.m = 'page'; }
     d.c = d.c.slice(0, 150000);
     var url = APP + '#import=' + encodeURIComponent(JSON.stringify(d));
+    var op = null;
+    try { op = window.opener; } catch (e) { op = null; }
+    if (op && /#tabkast$/.test(location.href)) {
+      var done = false;
+      window.addEventListener('message', function (ev) {
+        if (ev.origin === ORIGIN && ev.data && ev.data.tabkastAck) { done = true; try { window.close(); } catch (e) {} }
+      });
+      try { op.postMessage({ tabkastImport: d }, ORIGIN); } catch (e) {}
+      setTimeout(function () { if (!done) location.href = url; }, 1200);
+      return;
+    }
     var win = window.open(url, '_blank');
     if (!win) location.href = url;
   }
@@ -1483,7 +1460,7 @@ const BUILTIN_SONGS = [
   }
   function bookmarkletCode() {
     const u = appUrl();
-    return u ? 'javascript:' + encodeURIComponent('(' + tabkastGrab.toString() + ')(' + JSON.stringify(u) + ')') : null;
+    return u ? 'javascript:' + encodeURIComponent('(' + tabkastGrab.toString() + ')(' + JSON.stringify(u) + ',' + JSON.stringify(location.origin) + ')') : null;
   }
 
   function extractFromHtml(html, url) {
@@ -1499,11 +1476,11 @@ const BUILTIN_SONGS = [
       }
     } catch (e) {}
     if (!d.c) {
-      const parts = [...doc.querySelectorAll('pre')].map((p) => p.textContent || '').filter((x) => x.split('-').length > 12);
+      const parts = $$('pre', doc).map((p) => p.textContent || '').filter((x) => x.split('-').length > 12);
       if (parts.length) Object.assign(d, { c: parts.join('\n\n'), m: 'pre' });
     }
     if (!d.c) {
-      doc.querySelectorAll('script, style, noscript, template').forEach((n) => n.remove());
+      $$('script, style, noscript, template', doc).forEach((n) => n.remove());
       Object.assign(d, { c: doc.body ? doc.body.textContent : '', m: 'page' });
     }
     return d;
@@ -1519,6 +1496,7 @@ const BUILTIN_SONGS = [
     if (m) return { title: cleanT(m[2]), artist: m[1].trim() };
     return { title: cleanT(t), artist: '' };
   }
+  const titleCase = (s) => (s && s === s.toUpperCase() && /[A-Z]/.test(s) ? s.toLowerCase().replace(/(^|\s|\()([a-zà-ÿ])/g, (m, a, b) => a + b.toUpperCase()) : s);
 
   function importToDraft(d) {
     const host = hostOf(d.u) || d.h || 'de pagina';
@@ -1527,42 +1505,60 @@ const BUILTIN_SONGS = [
     if (d.m === 'page') {
       const only = TabEngine.onlyTabs(text);
       if (only) { text = only; extra = ' Alleen de tabregels zijn overgenomen.'; }
-      else { text = ''; extra = ' Op deze pagina staan geen tabregels als tekst. Sommige sites tekenen tabs als afbeelding. Selecteer de tab op de pagina en probeer het opnieuw, of kies een site met teksttabs.'; }
+      else { text = ''; extra = ' Op deze pagina staan geen tabregels als tekst. Sommige sites tonen tabs als afbeelding. Selecteer de tab op de pagina en probeer het opnieuw, of kies een andere site.'; }
     }
     const meta = guessMeta(d.pt);
     return {
-      title: (d.ti || meta.title || '').trim(),
+      title: titleCase((d.ti || meta.title || '').trim()),
       artist: (d.ar || meta.artist || '').trim(),
       key: (d.k || '').trim(),
       instrument: /bass/i.test(d.ty || '') ? 'bass' : null,
       tab: text,
       source: isHttp(d.u) ? d.u : '',
-      note: `Opgehaald van ${host}.${extra}${text ? ' Controleer de gegevens en klik op Opslaan.' : ''}`
+      note: `Opgehaald van ${host}.${extra}${text ? ' Controleer de gegevens en klik op Opslaan.' : ''}`,
+      empty: !text
     };
   }
 
-  function checkImport() {
+  function checkHashImport() {
     const h = location.hash;
     if (!h.startsWith('#import=')) return;
     let data = null;
     try { data = JSON.parse(decodeURIComponent(h.slice(8))); } catch (e) { data = null; }
     try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
     if (!data || typeof data.c !== 'string') { toast('De tab kon niet worden gelezen. Kopieer en plak hem dan zelf.'); return; }
-    openEditor(null, importToDraft(data));
+    store.set(KEYS.bm, true);
+    const draft = importToDraft(data);
+    openEditor(null, draft, 'link', draft.source);
   }
-  window.addEventListener('hashchange', checkImport);
+  window.addEventListener('hashchange', checkHashImport);
 
-  /* ---------- Dialoog: tab toevoegen of bewerken ---------- */
+  // Tab ontvangen van een bronpagina die Tabkast zelf heeft geopend
+  let sourceWin = null;
+  window.addEventListener('message', (e) => {
+    const d = e.data && e.data.tabkastImport;
+    if (!d || typeof d.c !== 'string' || !sourceWin || e.source !== sourceWin) return;
+    try { e.source.postMessage({ tabkastAck: true }, e.origin); } catch (err) {}
+    sourceWin = null;
+    store.set(KEYS.bm, true);
+    const draft = importToDraft(d);
+    if (!dlg.open) openEditor(null, null, 'link', draft.source);
+    applyDraft(draft);
+    setStatus(draft.empty ? '' : 'Tab ontvangen.', 'ok');
+    try { window.focus(); } catch (err) {}
+  });
+
+  /* ---------- Dialoog ---------- */
   const dlg = $('#dlg');
   const f = { url: $('#fUrl'), title: $('#fTitle'), artist: $('#fArtist'), key: $('#fKey'), tab: $('#fTab'), def: $('#fDef') };
-  let editId = null, editSource = '', dlgInst = 'guitar', instTouched = false;
+  let editId = null, editSource = '', dlgInst = 'guitar', instTouched = false, dlgMode = 'link';
 
   f.def.innerHTML = Array.from({ length: 25 }, (_, i) => i - 12)
     .map((v) => `<option value="${v}">${v === 0 ? 'Origineel' : `${fmtSemis(v)} ${Math.abs(v) === 1 ? 'halve toon' : 'halve tonen'}`}</option>`).join('');
 
   function setDlgInst(inst) {
     dlgInst = inst;
-    document.querySelectorAll('#fInst button').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.inst === inst)));
+    $$('#fInst button').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.inst === inst)));
   }
   function setStatus(html, kind) {
     const el = $('#urlStatus');
@@ -1574,16 +1570,34 @@ const BUILTIN_SONGS = [
     el.hidden = !text;
     el.textContent = text || '';
   }
+  function setMode(mode) {
+    dlgMode = mode;
+    $$('#srcSeg button').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.src === mode)));
+    $('#linkPanel').hidden = mode !== 'link';
+    updatePanels();
+  }
+  function updatePanels() {
+    const hasTab = !!f.tab.value.trim();
+    $('#detailsPanel').hidden = !(editId || dlgMode === 'paste' || hasTab);
+    $('#saveBtn').disabled = !hasTab;
+  }
+  function updateSearchLinks() {
+    const term = (f.title.value.trim() && f.title.value.trim() + ' ' + f.artist.value.trim()).trim() || state.q.trim();
+    const e = encodeURIComponent(term);
+    const suffix = dlgInst === 'bass' ? ' bass tab' : ' tab';
+    $('#lnkUG').href = term ? `https://www.ultimate-guitar.com/search.php?search_type=title&value=${e}` : 'https://www.ultimate-guitar.com/';
+    $('#lnkGG').href = `https://www.google.com/search?q=${encodeURIComponent(term + suffix)}`;
+  }
 
-  function openEditor(song, draft) {
+  function openEditor(song, draft, mode, url) {
     editId = song ? song.id : null;
     editSource = song ? (song.source || '') : (draft && draft.source) || '';
     $('#dlgTitle').textContent = song ? 'Tab bewerken' : 'Tab toevoegen';
-    $('#urlBox').hidden = !!song;
-    f.url.value = draft && draft.source ? draft.source : '';
+    $('#srcSeg').hidden = !!song;
+    f.url.value = url || (draft && draft.source) || '';
     setStatus('');
     setNote(draft ? draft.note : '');
-    f.title.value = song ? song.title : draft ? draft.title : (state.q.trim() || '');
+    f.title.value = song ? song.title : draft ? draft.title : '';
     f.artist.value = song ? (song.artist || '') : draft ? draft.artist : '';
     f.key.value = song ? (song.key || '') : draft ? draft.key : '';
     f.tab.value = song ? song.tab : draft ? draft.tab : '';
@@ -1592,15 +1606,22 @@ const BUILTIN_SONGS = [
     setDlgInst(song ? song.instrument : (draft && draft.instrument) || state.instrument);
     $('#err').textContent = '';
     $('#howto').open = false;
+    if (song) { $('#linkPanel').hidden = true; dlgMode = 'edit'; } else setMode(mode || 'link');
     detect();
+    updatePanels();
+    updateSearchLinks();
     stopScroll();
+    closePops();
     if (!dlg.open) { try { dlg.showModal(); } catch (e) { dlg.setAttribute('open', ''); } }
     setTimeout(() => {
-      const target = song ? f.tab : draft ? (draft.title ? $('#saveBtn') : f.title) : f.url;
-      target.focus();
+      const target = song ? f.tab : draft && !draft.empty ? (draft.title ? $('#saveBtn') : f.title) : dlgMode === 'paste' ? f.tab : f.url;
+      if (target && !target.disabled) target.focus();
     }, 20);
   }
-  function closeEditor() { try { dlg.close(); } catch (e) { dlg.removeAttribute('open'); } }
+  function closeEditor() {
+    sourceWin = null;
+    try { dlg.close(); } catch (e) { dlg.removeAttribute('open'); }
+  }
 
   function applyDraft(draft) {
     f.tab.value = draft.tab;
@@ -1609,8 +1630,10 @@ const BUILTIN_SONGS = [
     if (!f.key.value.trim()) f.key.value = draft.key;
     if (draft.instrument && !instTouched) { setDlgInst(draft.instrument); instTouched = true; }
     editSource = draft.source || editSource;
+    if (draft.source && !f.url.value) f.url.value = draft.source;
     setNote(draft.note);
     detect();
+    updatePanels();
   }
 
   function detect() {
@@ -1620,11 +1643,11 @@ const BUILTIN_SONGS = [
     $('#onlyTabsBtn').hidden = true;
     if (!text.trim()) { out.textContent = 'Tabregels zien eruit als e|--0--3--|, met elke snaar op een eigen regel.'; return; }
     const r = TabEngine.transpose(text, 0, { instrument: dlgInst });
-    if (!r.blocks) { out.textContent = 'Nog geen tabregels herkend. Zet elke snaar op een eigen regel, bijvoorbeeld e|--0--3--|. Akkoordregels worden wel getransponeerd.'; return; }
-    let msg = `Herkend: ${r.blocks} ${r.blocks === 1 ? 'tabblok' : 'tabblokken'} met ${r.strings} snaren, stemming ${r.tuning.join(' ')}.`;
+    if (!r.blocks) { out.textContent = 'Nog geen tabregels herkend. Akkoordregels worden wel getransponeerd.'; return; }
+    let msg = `${r.blocks} ${r.blocks === 1 ? 'tabblok' : 'tabblokken'} herkend, ${r.strings} snaren, stemming ${r.tuning.join(' ')}.`;
     if (!instTouched) {
-      if (r.strings <= 5 && dlgInst === 'guitar') { setDlgInst('bass'); msg += ' Instrument op basgitaar gezet.'; }
-      else if (r.strings >= 6 && dlgInst === 'bass') { setDlgInst('guitar'); msg += ' Instrument op elektrische gitaar gezet.'; }
+      if (r.strings <= 5 && dlgInst === 'guitar') { setDlgInst('bass'); msg += ' Instrument op bas gezet.'; }
+      else if (r.strings >= 6 && dlgInst === 'bass') { setDlgInst('guitar'); msg += ' Instrument op gitaar gezet.'; }
     }
     out.textContent = msg;
     out.classList.add('ok');
@@ -1632,14 +1655,23 @@ const BUILTIN_SONGS = [
     $('#onlyTabsBtn').hidden = !only || only.trim() === TabEngine.cleanImported(text).trim();
   }
 
-  // Sites die bekend staan om het blokkeren van uitlezen door andere websites
   const BLOCKED = /(^|\.)(ultimate-guitar\.com|songsterr\.com|911tabs\.com|guitaretab\.com|e-chords\.com|chordify\.net|bigbasstabs\.com)$/i;
 
-  function showBlocked(u, known) {
-    const host = u.hostname.replace(/^www\./, '');
-    setStatus(`<strong>${esc(host)}</strong> ${known ? 'laat' : 'lijkt'} andere websites zijn pagina’s niet ${known ? '' : 'te '}uitlezen, dus Tabkast kan de tab niet zelf ophalen. Open de pagina en klik daar op je bladwijzer <strong>Naar Tabkast</strong>.
-      <span class="acts"><a class="btn" href="${esc(u.href)}" target="_blank" rel="noopener">Pagina openen</a>
-      <button type="button" class="linkbtn" data-act="howto">Bladwijzerknop installeren</button></span>`, 'err');
+  function openSource(href) {
+    const target = href.replace(/#.*$/, '') + '#tabkast';
+    sourceWin = window.open(target, '_blank');
+    return !!sourceWin;
+  }
+
+  function showWaiting(u, opened) {
+    const host = esc(u.hostname.replace(/^www\./, ''));
+    const used = store.get(KEYS.bm, false);
+    const lead = opened
+      ? `De pagina is geopend in een nieuw tabblad. Klik daar op je bladwijzer <strong>Naar Tabkast</strong>; de tab komt dan vanzelf hier binnen.`
+      : `${host} blokkeert ophalen via een link. Open de pagina en klik daar op je bladwijzer <strong>Naar Tabkast</strong>; de tab komt dan vanzelf hier binnen.`;
+    setStatus(`${lead}<span class="acts"><button type="button" class="btn sm" data-st="open">${opened ? 'Pagina opnieuw openen' : 'Pagina openen'}</button>
+      </span>`, 'wait');
+    if (!used) $('#howto').open = true;
   }
 
   async function fetchUrl() {
@@ -1648,12 +1680,15 @@ const BUILTIN_SONGS = [
     if (!/^https?:\/\//i.test(raw)) raw = 'https://' + raw;
     let u;
     try { u = new URL(raw); } catch (e) { setStatus('Dit is geen geldige link.', 'err'); return; }
-    if (u.hostname === 'github.com' && /\/blob\//.test(u.pathname)) {
-      u = new URL('https://raw.githubusercontent.com' + u.pathname.replace('/blob/', '/'));
-    }
+    if (u.hostname === 'github.com' && /\/blob\//.test(u.pathname)) u = new URL('https://raw.githubusercontent.com' + u.pathname.replace('/blob/', '/'));
     setNote('');
-    if (BLOCKED.test(u.hostname)) { showBlocked(u, true); return; }
-    setStatus('Pagina ophalen…');
+    if (BLOCKED.test(u.hostname)) {
+      // Bekende tabsite: meteen de pagina openen (nog binnen de klik, dus niet geblokkeerd als pop-up)
+      const opened = store.get(KEYS.bm, false) ? openSource(u.href) : false;
+      showWaiting(u, opened);
+      return;
+    }
+    setStatus('Ophalen…');
     $('#fetchBtn').disabled = true;
     try {
       const res = await fetch(u.href, { credentials: 'omit' });
@@ -1665,9 +1700,9 @@ const BUILTIN_SONGS = [
         : { c: body, m: 'pre', u: u.href, h: u.hostname, pt: decodeURIComponent(u.pathname.split('/').pop() || '').replace(/\.[a-z0-9]+$/i, '').replace(/[_-]+/g, ' ') };
       const draft = importToDraft(d);
       applyDraft(draft);
-      setStatus(draft.tab ? 'Tab opgehaald.' : '', draft.tab ? 'ok' : '');
+      setStatus(draft.empty ? '' : 'Tab opgehaald.', 'ok');
     } catch (e) {
-      showBlocked(u, false);
+      showWaiting(u, false);
     } finally {
       $('#fetchBtn').disabled = false;
     }
@@ -1676,18 +1711,29 @@ const BUILTIN_SONGS = [
   $('#fetchBtn').addEventListener('click', fetchUrl);
   f.url.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); fetchUrl(); } });
   $('#urlStatus').addEventListener('click', (e) => {
-    if (e.target.closest('[data-act="howto"]')) { const h = $('#howto'); h.open = true; h.scrollIntoView({ block: 'nearest' }); }
+    const b = e.target.closest('[data-st]');
+    if (!b) return;
+    if (b.dataset.st === 'howto') { const h = $('#howto'); h.open = true; h.scrollIntoView({ block: 'nearest' }); }
+    if (b.dataset.st === 'open') {
+      let u; try { u = new URL(/^https?:\/\//i.test(f.url.value.trim()) ? f.url.value.trim() : 'https://' + f.url.value.trim()); } catch (err) { return; }
+      showWaiting(u, openSource(u.href));
+    }
+  });
+  $('#srcSeg').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-src]');
+    if (!b) return;
+    setMode(b.dataset.src);
+    (b.dataset.src === 'paste' ? f.tab : f.url).focus();
   });
 
   f.tab.addEventListener('input', () => {
     const v = f.tab.value.trim();
-    if (/^https?:\/\/\S+$/i.test(v) && !$('#urlBox').hidden) {
-      f.url.value = v; f.tab.value = '';
-      fetchUrl();
-    }
+    if (/^https?:\/\/\S+$/i.test(v) && !editId) { f.url.value = v; f.tab.value = ''; setMode('link'); fetchUrl(); }
     detect();
+    updatePanels();
   });
   f.tab.addEventListener('keydown', (e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); saveEditor(); } });
+  [f.title, f.artist].forEach((el) => el.addEventListener('input', updateSearchLinks));
   $('#onlyTabsBtn').addEventListener('click', () => {
     const only = TabEngine.onlyTabs(f.tab.value);
     if (only) { f.tab.value = only; detect(); }
@@ -1697,24 +1743,26 @@ const BUILTIN_SONGS = [
     if (!b) return;
     instTouched = true;
     setDlgInst(b.dataset.inst);
+    updateSearchLinks();
   });
   $('#cancelBtn').addEventListener('click', closeEditor);
+  $('#closeBtn').addEventListener('click', closeEditor);
   $('#saveBtn').addEventListener('click', saveEditor);
+  dlg.addEventListener('close', () => { sourceWin = null; });
 
   function saveEditor() {
-    const title = f.title.value.trim();
     const tab = f.tab.value.replace(/\s+$/, '');
+    if (!tab.trim()) { $('#err').textContent = 'Haal eerst een tab op of plak er een.'; return; }
+    const title = f.title.value.trim();
     if (!title) { $('#err').textContent = 'Vul een titel in.'; f.title.focus(); return; }
-    if (!tab.trim()) { $('#err').textContent = 'Plak eerst een tab of haal hem op met een link.'; f.tab.focus(); return; }
-    const prev = editId ? state.user.find((s) => s.id === editId) : null;
+    const prev = editId ? getSong(editId) : null;
     const rec = {
-      id: editId || newId(),
-      title, artist: f.artist.value.trim(), key: f.key.value.trim(),
+      id: editId || newId(), title, artist: f.artist.value.trim(), key: f.key.value.trim(),
       instrument: dlgInst, tab, source: editSource || '',
       created: prev ? (prev.created || Date.now()) : Date.now()
     };
     const idx = state.user.findIndex((s) => s.id === rec.id);
-    if (idx >= 0) state.user[idx] = rec; else state.user.unshift(rec);
+    if (idx >= 0) state.user[idx] = rec; else state.user.push(rec);
     const def = parseInt(f.def.value, 10) || 0;
     if (def) state.defaults[rec.id] = def; else delete state.defaults[rec.id];
     delete state.current[rec.id];
@@ -1724,42 +1772,49 @@ const BUILTIN_SONGS = [
     state.q = ''; q.value = '';
     renderList();
     select(rec.id);
-    toast(saved ? (editId ? 'Wijzigingen opgeslagen' : 'Tab opgeslagen in je kast') : 'Opslaan in deze browser lukte niet; de tab blijft staan tot je de pagina sluit.');
+    toast(saved ? (editId ? 'Wijzigingen opgeslagen' : 'Tab opgeslagen') : 'Opslaan in deze browser lukte niet; de tab blijft staan tot je de pagina sluit.');
   }
 
-  // Bladwijzerknop voorbereiden
   (function setupBookmarklet() {
     const a = $('#bmLink');
     const code = bookmarkletCode();
     if (code) {
       a.href = code;
-      a.title = 'Sleep mij naar je bladwijzerbalk';
-      $('#bmNote').textContent = '';
+      a.title = 'Sleep naar je bladwijzerbalk';
     } else {
       a.removeAttribute('href');
       a.setAttribute('aria-disabled', 'true');
-      $('#bmNote').textContent = 'De knop werkt vanaf de versie van Tabkast die op internet staat, bijvoorbeeld via GitHub Pages.';
+      $('#bmNote').textContent = 'De bladwijzer werkt vanaf de online versie van Tabkast, bijvoorbeeld op GitHub Pages.';
     }
-    a.addEventListener('click', (e) => { e.preventDefault(); toast(code ? 'Sleep de knop naar je bladwijzerbalk en klik hem daar aan.' : 'Zet Tabkast eerst online om de knop te gebruiken.'); });
+    a.addEventListener('click', (e) => { e.preventDefault(); toast(code ? 'Sleep de knop naar je bladwijzerbalk.' : 'Zet Tabkast eerst online om de bladwijzer te gebruiken.'); });
     $('#bmCopy').addEventListener('click', async () => {
-      if (!code) { toast('Zet Tabkast eerst online om de knop te gebruiken.'); return; }
-      toast((await copyText(code)) ? 'Bladwijzercode gekopieerd' : 'Kopiëren lukte niet.');
+      if (!code) { toast('Zet Tabkast eerst online om de bladwijzer te gebruiken.'); return; }
+      toast((await copyText(code)) ? 'Code gekopieerd' : 'Kopiëren lukte niet.');
     });
   })();
 
-  $('#addBtn').addEventListener('click', () => openEditor(null));
-  $('#addBtn2').addEventListener('click', () => openEditor(null));
-  $('#bmTipBtn').addEventListener('click', () => { openEditor(null); $('#howto').open = true; });
-
+  $('#addBtn').addEventListener('click', () => openEditor(null, null, 'link'));
   if (mq.addEventListener) mq.addEventListener('change', () => { if (!mq.matches) app.classList.remove('viewing'); });
 
-  // Wijzigingen uit een ander tabblad (bijvoorbeeld na een import) direct tonen
+  // Wijzigingen uit een ander tabblad direct tonen
   window.addEventListener('storage', (e) => {
-    if (e.key === KEYS.user) state.user = loadUser();
-    else if (e.key === KEYS.defaults) state.defaults = store.get(KEYS.defaults, {}) || {};
-    else return;
-    renderList();
-    if (state.selected && !getSong(state.selected)) { state.selected = null; renderWelcome(); }
+    if (e.key === KEYS.user) {
+      const before = new Set(state.user.map((s) => s.id));
+      state.user = loadUser();
+      const added = state.user.find((s) => !before.has(s.id));
+      renderList();
+      if (added && dlg.open && !editId && added.source && f.url.value && added.source.replace(/#.*$/, '') === f.url.value.trim().replace(/#.*$/, '')) {
+        closeEditor();
+        if (state.instrument !== added.instrument) { state.instrument = added.instrument; renderInstrument(); renderList(); }
+        select(added.id);
+        toast('Tab toegevoegd in een ander tabblad');
+        return;
+      }
+    } else if (e.key === KEYS.defaults) {
+      state.defaults = store.get(KEYS.defaults, {}) || {};
+      renderList();
+    } else return;
+    if (state.selected && !getSong(state.selected)) { state.selected = null; renderEmptyViewer(); }
     else updateSheet();
   });
 
@@ -1767,7 +1822,7 @@ const BUILTIN_SONGS = [
   renderInstrument();
   renderList();
   renderViewer();
-  checkImport();
+  checkHashImport();
 })();
 
 </script>
